@@ -165,11 +165,11 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="careers.html">Careers</a>
-                    </li>
-
                     
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
 
                 </ul>
             </div>
@@ -177,7 +177,6 @@
     </nav>
 </main>
 <!-- Navbar End -->
-
 
 <!-- 👶 Pre-School Section -->
 <section class="product-section">
@@ -257,8 +256,7 @@
 
 
 
-<!-- Footer start -->
-
+<!-- Footer Start -->
 <footer class="site-footer">
     <div class="container">
         <div class="row">
@@ -271,25 +269,17 @@
                     7 Albertyn Street, Vorna Valley, Johannesburg, Gauteng, 1686
                 </strong>
 
-                <br>
-                <br>
-
-                
+                <br><br>
 
                 <ul class="social-icon mt-4">
                     <li class="social-icon-item">
-                        <a href="#" class="social-icon-link bi-facebook">
-                        </a>
+                        <a href="#" class="social-icon-link bi-facebook"></a>
                     </li>
-
                     <li class="social-icon-item">
-                        <a href="#" target="_new" class="social-icon-link bi-twitter">
-                        </a>
+                        <a href="#" target="_new" class="social-icon-link bi-twitter"></a>
                     </li>
-
                     <li class="social-icon-item">
-                        <a href="#" class="social-icon-link bi-whatsapp">
-                        </a>
+                        <a href="#" class="social-icon-link bi-whatsapp"></a>
                     </li>
                 </ul>
             </div>
@@ -299,71 +289,112 @@
 
                 <p class="d-flex mb-1">
                     <strong class="me-2">Phone:</strong>
-                    <a href="tel: 305-240-9671" class="site-footer-link">
-                        +27 (0) 61 411 5412 
-                        </a>
-                </p>
-                <br>
+                    <a href="tel:+27614115412" class="site-footer-link">
+                        +27 (0) 61 411 5412
+                    </a>
+                </p><br>
 
                 <p class="d-flex">
                     <strong class="me-2">Email:</strong>
-
-                    <a href="mailto:info@yourgmail.com" class="site-footer-link">
+                    <a href="mailto:Sales@ThabangLeruo.co.za" class="site-footer-link">
                         Sales@ThabangLeruo.co.za
                     </a>
                 </p>
             </div>
 
-
             <div class="col-lg-5 col-12">
                 <em class="text-white d-block mb-4">Opening Hours.</em>
 
                 <ul class="opening-hours-list">
-                    <li class="d-flex">
-                        Monday - Friday
-                        <span class="underline"></span>
-
-                        <strong>9:00 - 18:00</strong>
-                    </li>
-
-                    <li class="d-flex">
-                        Saturday
-                        <span class="underline"></span>
-
-                        <strong>11:00 - 16:30</strong>
-                    </li>
-
-                    <li class="d-flex">
-                        Sunday
-                        <span class="underline"></span>
-
-                        <strong>Closed</strong>
-                    </li>
+                    <li class="d-flex">Monday - Friday<span class="underline"></span><strong>9:00 - 18:00</strong></li>
+                    <li class="d-flex">Saturday<span class="underline"></span><strong>11:00 - 16:30</strong></li>
+                    <li class="d-flex">Sunday<span class="underline"></span><strong>Closed</strong></li>
                 </ul>
             </div>
 
+           
+
+            
+
             <div class="col-lg-8 col-12 mt-4">
-                <p class="copyright-text mb-0">Copyright © 2025 Thabang Lerou Clothing 
+                <p class="copyright-text mb-0">
+                    Copyright © 2025 Thabang Leruo Clothing
                 </p>
             </div>
+
+        </div>
     </div>
 </footer>
+<!-- Footer End -->
 
-<!-- Footer end -->
-</main>
+<!-- Bootstrap Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- JAVASCRIPT FILES -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.sticky.js"></script>
-<script src="js/click-scroll.js"></script>
-<script src="js/vegas.min.js"></script>
+<!-- Your Custom JS -->
 <script src="js/custom.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Hero Slider JS with Fade Effect -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const heroSlides = document.querySelector('.hero-slides');
+  
+      if (heroSlides) {
+        const images = [
+          'images/slides/slide1.jpg',
+          'images/slides/slide2.jpg',
+          'images/slides/slide3.jpg'
+        ];
+  
+        let current = 0;
+  
+        function changeBackground() {
+          // Fade out
+          heroSlides.classList.add('fade-out');
+  
+          // Wait for fade out transition
+          setTimeout(() => {
+            // Change background
+            heroSlides.style.backgroundImage = `url(${images[current]})`;
+  
+            // Fade back in
+            heroSlides.classList.remove('fade-out');
+  
+            // Move to next image
+            current = (current + 1) % images.length;
+          }, 1000); // Matches the CSS transition duration (1s)
+        }
+  
+        // Set first background immediately
+        heroSlides.style.backgroundImage = `url(${images[current]})`;
+        current = (current + 1) % images.length;
+  
+        // Change every 5 seconds
+        setInterval(changeBackground, 5000);
+      }
+    });
+  </script>
 
+<script>
+    document.getElementById('whatsapp-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+  
+      // Get form values
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var message = document.getElementById('message').value.trim();
+  
+      // Compose WhatsApp message
+      var whatsappMessage = `Hello, my name is ${name}.%0AEmail: ${email}%0A%0A${message}`;
+  
+      // WhatsApp link with your number (+27 61 411 5412)
+      var whatsappURL = "https://wa.me/27614115412?text=" + whatsappMessage;
+  
+      // Open WhatsApp chat
+      window.open(whatsappURL, '_blank');
+    });
+  </script>
+  
 
 </body>
 </html>
+
