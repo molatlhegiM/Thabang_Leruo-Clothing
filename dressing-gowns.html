@@ -80,106 +80,208 @@
     </head>
     
     <body>
-
 <!-- Navbar Start -->
 <main>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <img src="images/LOGO.png" class="img-fluid" alt="Pulse Clothing Logo">
+  <nav class="navbar navbar-expand-lg glassy-navbar">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="images/LOGO.png" class="img-fluid" alt="Thabang Leruo Clothing">
+      </a>
+
+      <!-- Mobile Toggle Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+
+          <li class="nav-item">
+            <a class="nav-link framed" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link framed" href="about.html">About Us</a>
+          </li>
+
+          <!-- School Uniforms Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="schoolDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              School Uniforms
             </a>
+            <ul class="dropdown-menu" aria-labelledby="schoolDropdown">
+              <li><a class="dropdown-item" href="pre-school.html">Pre-School</a></li>
+              <li><a class="dropdown-item" href="primary-school.html">Primary School</a></li>
+              <li><a class="dropdown-item" href="high-school.html">High School</a></li>
+            </ul>
+          </li>
 
-            <!-- Mobile Toggle Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+          <!-- Corporate Wear Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="corporateDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Corporate Wear
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="corporateDropdown">
+              <li><a class="dropdown-item" href="workwear.html">Workwear</a></li>
+              <li><a class="dropdown-item" href="officewear.html">Office Wear</a></li>
+              <li><a class="dropdown-item" href="warehouse-uniforms.html">Warehouse Uniforms</a></li>
+            </ul>
+          </li>
 
-            <!-- Navbar Links -->
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ms-auto">
+          <!-- Hospitality Wear Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="hospitalityDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hospitality Wear
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="hospitalityDropdown">
+              <li><a class="dropdown-item" href="chef-kitchen-uniforms.html">Chef & Kitchen Uniforms</a></li>
+              <li><a class="dropdown-item" href="dressing-gowns.html">Dressing Gowns</a></li>
+              <li><a class="dropdown-item" href="towels-linen.html">Towels & Linen</a></li>
+            </ul>
+          </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
+          <!-- PPE Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="ppeDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              PPE
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="ppeDropdown">
+              <li><a class="dropdown-item" href="lab-coats-housekeeping.html">Lab Coats & Housekeeping</a></li>
+              <li><a class="dropdown-item" href="industrial-mining.html">Industrial & Mining</a></li>
+              <li><a class="dropdown-item" href="work-overalls.html">Work Overalls</a></li>
+            </ul>
+          </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
-                    </li>
+          <!-- Medical Uniforms -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="medicalDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Medical Uniforms
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="medicalDropdown">
+              <li><a class="dropdown-item" href="medical-scrubs.html">Medical Scrubs</a></li>
+            </ul>
+          </li>
 
-                    <!-- School Uniforms Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="schoolDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            School Uniforms
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="schoolDropdown">
-                            <li><a class="dropdown-item" href="pre-school.html">Pre-School</a></li>
-                            <li><a class="dropdown-item" href="primary-school.html">Primary School</a></li>
-                            <li><a class="dropdown-item" href="high-school.html">High School</a></li>
-                        </ul>
-                    </li>
+          <li class="nav-item">
+            <a class="nav-link framed" href="contact.html">Contact Us</a>
+          </li>
 
-                    <!-- Corporate Wear Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="corporateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Corporate Wear
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="corporateDropdown">
-                            <li><a class="dropdown-item" href="workwear.html">Workwear</a></li>
-                            <li><a class="dropdown-item" href="officewear.html">Office Wear</a></li>
-                            <li><a class="dropdown-item" href="warehouse-uniforms.html">Warehouse Uniforms</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- Hospitality Wear Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="hospitalityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Hospitality Wear
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="hospitalityDropdown">
-                            <li><a class="dropdown-item" href="chef-kitchen-uniforms.html">Chef & Kitchen Uniforms</a></li>
-                            <li><a class="dropdown-item" href="dressing-gowns.html">Dressing Gowns</a></li>
-                            <li><a class="dropdown-item" href="towels-linen.html">Towels & Linen</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- PPE Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="ppeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            PPE
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="ppeDropdown">
-                            <li><a class="dropdown-item" href="lab-coats-housekeeping.html">Lab Coats & Housekeeping</a></li>
-                            <li><a class="dropdown-item" href="industrial-mining.html">Industrial & Mining</a></li>
-                            <li><a class="dropdown-item" href="work-overalls.html">Work Overalls</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- Medical Uniforms Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="medicalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Medical Uniforms
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="medicalDropdown">
-                            <li><a class="dropdown-item" href="medical-scrubs.html">Medical Scrubs</a></li>
-                        </ul>
-                    </li>
-
-                  
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </main>
 <!-- Navbar End -->
+<!-- Navbar Start -->
+<main>
+  <nav class="navbar navbar-expand-lg glassy-navbar">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="images/LOGO.png" class="img-fluid" alt="Thabang Leruo Clothing">
+      </a>
 
+      <!-- Mobile Toggle Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
 
+          <li class="nav-item">
+            <a class="nav-link framed" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link framed" href="about.html">About Us</a>
+          </li>
+
+          <!-- School Uniforms Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="schoolDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              School Uniforms
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="schoolDropdown">
+              <li><a class="dropdown-item" href="pre-school.html">Pre-School</a></li>
+              <li><a class="dropdown-item" href="primary-school.html">Primary School</a></li>
+              <li><a class="dropdown-item" href="high-school.html">High School</a></li>
+            </ul>
+          </li>
+
+          <!-- Corporate Wear Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="corporateDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Corporate Wear
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="corporateDropdown">
+              <li><a class="dropdown-item" href="workwear.html">Workwear</a></li>
+              <li><a class="dropdown-item" href="officewear.html">Office Wear</a></li>
+              <li><a class="dropdown-item" href="warehouse-uniforms.html">Warehouse Uniforms</a></li>
+            </ul>
+          </li>
+
+          <!-- Hospitality Wear Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="hospitalityDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hospitality Wear
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="hospitalityDropdown">
+              <li><a class="dropdown-item" href="chef-kitchen-uniforms.html">Chef & Kitchen Uniforms</a></li>
+              <li><a class="dropdown-item" href="dressing-gowns.html">Dressing Gowns</a></li>
+              <li><a class="dropdown-item" href="towels-linen.html">Towels & Linen</a></li>
+            </ul>
+          </li>
+
+          <!-- PPE Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="ppeDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              PPE
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="ppeDropdown">
+              <li><a class="dropdown-item" href="lab-coats-housekeeping.html">Lab Coats & Housekeeping</a></li>
+              <li><a class="dropdown-item" href="industrial-mining.html">Industrial & Mining</a></li>
+              <li><a class="dropdown-item" href="work-overalls.html">Work Overalls</a></li>
+            </ul>
+          </li>
+
+          <!-- Medical Uniforms -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle framed" href="#" id="medicalDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Medical Uniforms
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="medicalDropdown">
+              <li><a class="dropdown-item" href="medical-scrubs.html">Medical Scrubs</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link framed" href="contact.html">Contact Us</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</main>
+<!-- Navbar End -->
 
 
 <!-- section start -->
