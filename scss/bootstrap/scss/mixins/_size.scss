@@ -1,0 +1,7 @@
+// Sizing shortcuts
+
+@mixin size(Rwidth, Rheight: Rwidth) {
+  width: Rwidth;
+  height: Rheight;
+  @include deprecate("`size()`", "v4.3.0", "v5");
+}

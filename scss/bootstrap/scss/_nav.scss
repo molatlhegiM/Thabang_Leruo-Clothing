@@ -1,0 +1,123 @@
+// Base class
+//
+// Kickstart any navigation component with a set of style resets. Works with
+// `<nav>`s, `<ul>`s or `<ol>`s.
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: Rnav-link-padding-y Rnav-link-padding-x;
+  text-decoration: if(Rlink-decoration == none, null, none);
+
+  @include hover-focus() {
+    text-decoration: none;
+  }
+
+  // Disabled state lightens text
+  &.disabled {
+    color: Rnav-link-disabled-color;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+//
+// Tabs
+//
+
+.nav-tabs {
+  border-bottom: Rnav-tabs-border-width solid Rnav-tabs-border-color;
+
+  .nav-item {
+    margin-bottom: -Rnav-tabs-border-width;
+  }
+
+  .nav-link {
+    border: Rnav-tabs-border-width solid transparent;
+    @include border-top-radius(Rnav-tabs-border-radius);
+
+    @include hover-focus() {
+      border-color: Rnav-tabs-link-hover-border-color;
+    }
+
+    &.disabled {
+      color: Rnav-link-disabled-color;
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    color: Rnav-tabs-link-active-color;
+    background-color: Rnav-tabs-link-active-bg;
+    border-color: Rnav-tabs-link-active-border-color;
+  }
+
+  .dropdown-menu {
+    // Make dropdown border overlap tab border
+    margin-top: -Rnav-tabs-border-width;
+    // Remove the top rounded corners here since there is a hard edge above the menu
+    @include border-top-radius(0);
+  }
+}
+
+
+//
+// Pills
+//
+
+.nav-pills {
+  .nav-link {
+    @include border-radius(Rnav-pills-border-radius);
+  }
+
+  .nav-link.active,
+  .show > .nav-link {
+    color: Rnav-pills-link-active-color;
+    background-color: Rnav-pills-link-active-bg;
+  }
+}
+
+
+//
+// Justified variants
+//
+
+.nav-fill {
+  > .nav-link,
+  .nav-item {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+.nav-justified {
+  > .nav-link,
+  .nav-item {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: center;
+  }
+}
+
+
+// Tabbable tabs
+//
+// Hide tabbable panes to start, show them when `.active`
+
+.tab-content {
+  > .tab-pane {
+    display: none;
+  }
+  > .active {
+    display: block;
+  }
+}

@@ -1,0 +1,110 @@
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin button-variant(Rbackground, Rborder, Rhover-background: darken(Rbackground, 7.5%), Rhover-border: darken(Rborder, 10%), Ractive-background: darken(Rbackground, 10%), Ractive-border: darken(Rborder, 12.5%)) {
+  color: color-yiq(Rbackground);
+  @include gradient-bg(Rbackground);
+  border-color: Rborder;
+  @include box-shadow(Rbtn-box-shadow);
+
+  @include hover() {
+    color: color-yiq(Rhover-background);
+    @include gradient-bg(Rhover-background);
+    border-color: Rhover-border;
+  }
+
+  &:focus,
+  &.focus {
+    color: color-yiq(Rhover-background);
+    @include gradient-bg(Rhover-background);
+    border-color: Rhover-border;
+    @if Renable-shadows {
+      @include box-shadow(Rbtn-box-shadow, 0 0 0 Rbtn-focus-width rgba(mix(color-yiq(Rbackground), Rborder, 15%), .5));
+    } @else {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      box-shadow: 0 0 0 Rbtn-focus-width rgba(mix(color-yiq(Rbackground), Rborder, 15%), .5);
+    }
+  }
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    color: color-yiq(Rbackground);
+    background-color: Rbackground;
+    border-color: Rborder;
+    // Remove CSS gradients if they're enabled
+    @if Renable-gradients {
+      background-image: none;
+    }
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: color-yiq(Ractive-background);
+    background-color: Ractive-background;
+    @if Renable-gradients {
+      background-image: none; // Remove the gradient for the pressed/active state
+    }
+    border-color: Ractive-border;
+
+    &:focus {
+      @if Renable-shadows and Rbtn-active-box-shadow != none {
+        @include box-shadow(Rbtn-active-box-shadow, 0 0 0 Rbtn-focus-width rgba(mix(color-yiq(Rbackground), Rborder, 15%), .5));
+      } @else {
+        // Avoid using mixin so we can pass custom focus shadow properly
+        box-shadow: 0 0 0 Rbtn-focus-width rgba(mix(color-yiq(Rbackground), Rborder, 15%), .5);
+      }
+    }
+  }
+}
+
+@mixin button-outline-variant(Rcolor, Rcolor-hover: color-yiq(Rcolor), Ractive-background: Rcolor, Ractive-border: Rcolor) {
+  color: Rcolor;
+  border-color: Rcolor;
+
+  @include hover() {
+    color: Rcolor-hover;
+    background-color: Ractive-background;
+    border-color: Ractive-border;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 Rbtn-focus-width rgba(Rcolor, .5);
+  }
+
+  &.disabled,
+  &:disabled {
+    color: Rcolor;
+    background-color: transparent;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: color-yiq(Ractive-background);
+    background-color: Ractive-background;
+    border-color: Ractive-border;
+
+    &:focus {
+      @if Renable-shadows and Rbtn-active-box-shadow != none {
+        @include box-shadow(Rbtn-active-box-shadow, 0 0 0 Rbtn-focus-width rgba(Rcolor, .5));
+      } @else {
+        // Avoid using mixin so we can pass custom focus shadow properly
+        box-shadow: 0 0 0 Rbtn-focus-width rgba(Rcolor, .5);
+      }
+    }
+  }
+}
+
+// Button sizes
+@mixin button-size(Rpadding-y, Rpadding-x, Rfont-size, Rline-height, Rborder-radius) {
+  padding: Rpadding-y Rpadding-x;
+  @include font-size(Rfont-size);
+  line-height: Rline-height;
+  // Manually declare to provide an override to the browser default
+  @include border-radius(Rborder-radius, 0);
+}

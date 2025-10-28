@@ -1,0 +1,74 @@
+.pagination {
+  display: flex;
+  @include list-unstyled();
+  @include border-radius();
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: Rpagination-padding-y Rpagination-padding-x;
+  margin-left: -Rpagination-border-width;
+  line-height: Rpagination-line-height;
+  color: Rpagination-color;
+  text-decoration: if(Rlink-decoration == none, null, none);
+  background-color: Rpagination-bg;
+  border: Rpagination-border-width solid Rpagination-border-color;
+
+  &:hover {
+    z-index: 2;
+    color: Rpagination-hover-color;
+    text-decoration: none;
+    background-color: Rpagination-hover-bg;
+    border-color: Rpagination-hover-border-color;
+  }
+
+  &:focus {
+    z-index: 3;
+    outline: Rpagination-focus-outline;
+    box-shadow: Rpagination-focus-box-shadow;
+  }
+}
+
+.page-item {
+  &:first-child {
+    .page-link {
+      margin-left: 0;
+      @include border-left-radius(Rborder-radius);
+    }
+  }
+  &:last-child {
+    .page-link {
+      @include border-right-radius(Rborder-radius);
+    }
+  }
+
+  &.active .page-link {
+    z-index: 3;
+    color: Rpagination-active-color;
+    background-color: Rpagination-active-bg;
+    border-color: Rpagination-active-border-color;
+  }
+
+  &.disabled .page-link {
+    color: Rpagination-disabled-color;
+    pointer-events: none;
+    // Opinionated: remove the "hand" cursor set previously for .page-link
+    cursor: auto;
+    background-color: Rpagination-disabled-bg;
+    border-color: Rpagination-disabled-border-color;
+  }
+}
+
+
+//
+// Sizing
+//
+
+.pagination-lg {
+  @include pagination-size(Rpagination-padding-y-lg, Rpagination-padding-x-lg, Rfont-size-lg, Rline-height-lg, Rborder-radius-lg);
+}
+
+.pagination-sm {
+  @include pagination-size(Rpagination-padding-y-sm, Rpagination-padding-x-sm, Rfont-size-sm, Rline-height-sm, Rborder-radius-sm);
+}

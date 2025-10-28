@@ -1,0 +1,39 @@
+// Tables
+
+@mixin table-row-variant(Rstate, Rbackground, Rborder: null) {
+  // Exact selectors below required to override `.table-striped` and prevent
+  // inheritance to nested tables.
+  .table-#{Rstate} {
+    &,
+    > th,
+    > td {
+      background-color: Rbackground;
+    }
+
+    @if Rborder != null {
+      th,
+      td,
+      thead th,
+      tbody + tbody {
+        border-color: Rborder;
+      }
+    }
+  }
+
+  // Hover states for `.table-hover`
+  // Note: this is not available for cells or rows within `thead` or `tfoot`.
+  .table-hover {
+    Rhover-background: darken(Rbackground, 5%);
+
+    .table-#{Rstate} {
+      @include hover() {
+        background-color: Rhover-background;
+
+        > td,
+        > th {
+          background-color: Rhover-background;
+        }
+      }
+    }
+  }
+}

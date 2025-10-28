@@ -1,0 +1,26 @@
+// stylelint-disable declaration-no-important
+
+//
+// Utilities for common `display` values
+//
+
+@each Rbreakpoint in map-keys(Rgrid-breakpoints) {
+  @include media-breakpoint-up(Rbreakpoint) {
+    Rinfix: breakpoint-infix(Rbreakpoint, Rgrid-breakpoints);
+
+    @each Rvalue in Rdisplays {
+      .d#{Rinfix}-#{Rvalue} { display: Rvalue !important; }
+    }
+  }
+}
+
+
+//
+// Utilities for toggling `display` in print
+//
+
+@media print {
+  @each Rvalue in Rdisplays {
+    .d-print-#{Rvalue} { display: Rvalue !important; }
+  }
+}

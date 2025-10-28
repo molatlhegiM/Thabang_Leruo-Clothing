@@ -1,0 +1,1142 @@
+// Variables
+//
+// Variables should follow the `Rcomponent-state-property-size` formula for
+// consistent naming. Ex: Rnav-link-disabled-color and Rmodal-content-box-shadow-xs.
+
+// Color system
+
+Rwhite:    #fff !default;
+Rgray-100: #f8f9fa !default;
+Rgray-200: #e9ecef !default;
+Rgray-300: #dee2e6 !default;
+Rgray-400: #ced4da !default;
+Rgray-500: #adb5bd !default;
+Rgray-600: #6c757d !default;
+Rgray-700: #495057 !default;
+Rgray-800: #343a40 !default;
+Rgray-900: #212529 !default;
+Rblack:    #000 !default;
+
+Rgrays: () !default;
+Rgrays: map-merge(
+  (
+    "100": Rgray-100,
+    "200": Rgray-200,
+    "300": Rgray-300,
+    "400": Rgray-400,
+    "500": Rgray-500,
+    "600": Rgray-600,
+    "700": Rgray-700,
+    "800": Rgray-800,
+    "900": Rgray-900
+  ),
+  Rgrays
+);
+
+Rblue:    #007bff !default;
+Rindigo:  #6610f2 !default;
+Rpurple:  #6f42c1 !default;
+Rpink:    #e83e8c !default;
+Rred:     #dc3545 !default;
+Rorange:  #fd7e14 !default;
+Ryellow:  #ffc107 !default;
+Rgreen:   #28a745 !default;
+Rteal:    #20c997 !default;
+Rcyan:    #17a2b8 !default;
+
+Rcolors: () !default;
+Rcolors: map-merge(
+  (
+    "blue":       Rblue,
+    "indigo":     Rindigo,
+    "purple":     Rpurple,
+    "pink":       Rpink,
+    "red":        Rred,
+    "orange":     Rorange,
+    "yellow":     Ryellow,
+    "green":      Rgreen,
+    "teal":       Rteal,
+    "cyan":       Rcyan,
+    "white":      Rwhite,
+    "gray":       Rgray-600,
+    "gray-dark":  Rgray-800
+  ),
+  Rcolors
+);
+
+Rprimary:       Rblue !default;
+Rsecondary:     Rgray-600 !default;
+Rsuccess:       Rgreen !default;
+Rinfo:          Rcyan !default;
+Rwarning:       Ryellow !default;
+Rdanger:        Rred !default;
+Rlight:         Rgray-100 !default;
+Rdark:          Rgray-800 !default;
+
+Rtheme-colors: () !default;
+Rtheme-colors: map-merge(
+  (
+    "primary":    Rprimary,
+    "secondary":  Rsecondary,
+    "success":    Rsuccess,
+    "info":       Rinfo,
+    "warning":    Rwarning,
+    "danger":     Rdanger,
+    "light":      Rlight,
+    "dark":       Rdark
+  ),
+  Rtheme-colors
+);
+
+// Set a specific jump point for requesting color jumps
+Rtheme-color-interval:      8% !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+Ryiq-contrasted-threshold:  150 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+Ryiq-text-dark:             Rgray-900 !default;
+Ryiq-text-light:            Rwhite !default;
+
+// Characters which are escaped by the escape-svg function
+Rescaped-characters: (
+  ("<", "%3c"),
+  (">", "%3e"),
+  ("#", "%23"),
+  ("(", "%28"),
+  (")", "%29"),
+) !default;
+
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+Renable-caret:                                true !default;
+Renable-rounded:                              true !default;
+Renable-shadows:                              false !default;
+Renable-gradients:                            false !default;
+Renable-transitions:                          true !default;
+Renable-prefers-reduced-motion-media-query:   true !default;
+Renable-hover-media-query:                    false !default; // Deprecated, no longer affects any compiled CSS
+Renable-grid-classes:                         true !default;
+Renable-pointer-cursor-for-buttons:           true !default;
+Renable-print-styles:                         true !default;
+Renable-responsive-font-sizes:                false !default;
+Renable-validation-icons:                     true !default;
+Renable-deprecation-messages:                 true !default;
+
+
+// Spacing
+//
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+// You can add more entries to the Rspacers map, should you need more variation.
+
+Rspacer: 1rem !default;
+Rspacers: () !default;
+Rspacers: map-merge(
+  (
+    0: 0,
+    1: (Rspacer * .25),
+    2: (Rspacer * .5),
+    3: Rspacer,
+    4: (Rspacer * 1.5),
+    5: (Rspacer * 3)
+  ),
+  Rspacers
+);
+
+// This variable affects the `.h-*` and `.w-*` classes.
+Rsizes: () !default;
+Rsizes: map-merge(
+  (
+    25: 25%,
+    50: 50%,
+    75: 75%,
+    100: 100%,
+    auto: auto
+  ),
+  Rsizes
+);
+
+
+// Body
+//
+// Settings for the `<body>` element.
+
+Rbody-bg:                   Rwhite !default;
+Rbody-color:                Rgray-900 !default;
+
+
+// Links
+//
+// Style anchor elements.
+
+Rlink-color:                              theme-color("primary") !default;
+Rlink-decoration:                         none !default;
+Rlink-hover-color:                        darken(Rlink-color, 15%) !default;
+Rlink-hover-decoration:                   underline !default;
+// Darken percentage for links with `.text-*` class (e.g. `.text-success`)
+Remphasized-link-hover-darken-percentage: 15% !default;
+
+// Paragraphs
+//
+// Style p element.
+
+Rparagraph-margin-bottom:   1rem !default;
+
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+Rgrid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+@include _assert-ascending(Rgrid-breakpoints, "Rgrid-breakpoints");
+@include _assert-starts-at-zero(Rgrid-breakpoints, "Rgrid-breakpoints");
+
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+Rcontainer-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+) !default;
+
+@include _assert-ascending(Rcontainer-max-widths, "Rcontainer-max-widths");
+
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+Rgrid-columns:                12 !default;
+Rgrid-gutter-width:           30px !default;
+Rgrid-row-columns:            6 !default;
+
+
+// Components
+//
+// Define common padding and border radius sizes and more.
+
+Rline-height-lg:              1.5 !default;
+Rline-height-sm:              1.5 !default;
+
+Rborder-width:                1px !default;
+Rborder-color:                Rgray-300 !default;
+
+Rborder-radius:               .25rem !default;
+Rborder-radius-lg:            .3rem !default;
+Rborder-radius-sm:            .2rem !default;
+
+Rrounded-pill:                50rem !default;
+
+Rbox-shadow-sm:               0 .125rem .25rem rgba(Rblack, .075) !default;
+Rbox-shadow:                  0 .5rem 1rem rgba(Rblack, .15) !default;
+Rbox-shadow-lg:               0 1rem 3rem rgba(Rblack, .175) !default;
+
+Rcomponent-active-color:      Rwhite !default;
+Rcomponent-active-bg:         theme-color("primary") !default;
+
+Rcaret-width:                 .3em !default;
+Rcaret-vertical-align:        Rcaret-width * .85 !default;
+Rcaret-spacing:               Rcaret-width * .85 !default;
+
+Rtransition-base:             all .2s ease-in-out !default;
+Rtransition-fade:             opacity .15s linear !default;
+Rtransition-collapse:         height .35s ease !default;
+
+Rembed-responsive-aspect-ratios: () !default;
+Rembed-responsive-aspect-ratios: join(
+  (
+    (21 9),
+    (16 9),
+    (4 3),
+    (1 1),
+  ),
+  Rembed-responsive-aspect-ratios
+);
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+// stylelint-disable value-keyword-case
+Rfont-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+Rfont-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+Rfont-family-base:            Rfont-family-sans-serif !default;
+// stylelint-enable value-keyword-case
+
+Rfont-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+Rfont-size-lg:                Rfont-size-base * 1.25 !default;
+Rfont-size-sm:                Rfont-size-base * .875 !default;
+
+Rfont-weight-lighter:         lighter !default;
+Rfont-weight-light:           300 !default;
+Rfont-weight-normal:          400 !default;
+Rfont-weight-bold:            700 !default;
+Rfont-weight-bolder:          bolder !default;
+
+Rfont-weight-base:            Rfont-weight-normal !default;
+Rline-height-base:            1.5 !default;
+
+Rh1-font-size:                Rfont-size-base * 2.5 !default;
+Rh2-font-size:                Rfont-size-base * 2 !default;
+Rh3-font-size:                Rfont-size-base * 1.75 !default;
+Rh4-font-size:                Rfont-size-base * 1.5 !default;
+Rh5-font-size:                Rfont-size-base * 1.25 !default;
+Rh6-font-size:                Rfont-size-base !default;
+
+Rheadings-margin-bottom:      Rspacer / 2 !default;
+Rheadings-font-family:        null !default;
+Rheadings-font-weight:        500 !default;
+Rheadings-line-height:        1.2 !default;
+Rheadings-color:              null !default;
+
+Rdisplay1-size:               6rem !default;
+Rdisplay2-size:               5.5rem !default;
+Rdisplay3-size:               4.5rem !default;
+Rdisplay4-size:               3.5rem !default;
+
+Rdisplay1-weight:             300 !default;
+Rdisplay2-weight:             300 !default;
+Rdisplay3-weight:             300 !default;
+Rdisplay4-weight:             300 !default;
+Rdisplay-line-height:         Rheadings-line-height !default;
+
+Rlead-font-size:              Rfont-size-base * 1.25 !default;
+Rlead-font-weight:            300 !default;
+
+Rsmall-font-size:             80% !default;
+
+Rtext-muted:                  Rgray-600 !default;
+
+Rblockquote-small-color:      Rgray-600 !default;
+Rblockquote-small-font-size:  Rsmall-font-size !default;
+Rblockquote-font-size:        Rfont-size-base * 1.25 !default;
+
+Rhr-border-color:             rgba(Rblack, .1) !default;
+Rhr-border-width:             Rborder-width !default;
+
+Rmark-padding:                .2em !default;
+
+Rdt-font-weight:              Rfont-weight-bold !default;
+
+Rkbd-box-shadow:              inset 0 -.1rem 0 rgba(Rblack, .25) !default;
+Rnested-kbd-font-weight:      Rfont-weight-bold !default;
+
+Rlist-inline-padding:         .5rem !default;
+
+Rmark-bg:                     #fcf8e3 !default;
+
+Rhr-margin-y:                 Rspacer !default;
+
+
+// Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+Rtable-cell-padding:          .75rem !default;
+Rtable-cell-padding-sm:       .3rem !default;
+
+Rtable-color:                 Rbody-color !default;
+Rtable-bg:                    null !default;
+Rtable-accent-bg:             rgba(Rblack, .05) !default;
+Rtable-hover-color:           Rtable-color !default;
+Rtable-hover-bg:              rgba(Rblack, .075) !default;
+Rtable-active-bg:             Rtable-hover-bg !default;
+
+Rtable-border-width:          Rborder-width !default;
+Rtable-border-color:          Rborder-color !default;
+
+Rtable-head-bg:               Rgray-200 !default;
+Rtable-head-color:            Rgray-700 !default;
+Rtable-th-font-weight:        null !default;
+
+Rtable-dark-color:            Rwhite !default;
+Rtable-dark-bg:               Rgray-800 !default;
+Rtable-dark-accent-bg:        rgba(Rwhite, .05) !default;
+Rtable-dark-hover-color:      Rtable-dark-color !default;
+Rtable-dark-hover-bg:         rgba(Rwhite, .075) !default;
+Rtable-dark-border-color:     lighten(Rtable-dark-bg, 7.5%) !default;
+
+Rtable-striped-order:         odd !default;
+
+Rtable-caption-color:         Rtext-muted !default;
+
+Rtable-bg-level:              -9 !default;
+Rtable-border-level:          -6 !default;
+
+
+// Buttons + Forms
+//
+// Shared variables that are reassigned to `Rinput-` and `Rbtn-` specific variables.
+
+Rinput-btn-padding-y:         .375rem !default;
+Rinput-btn-padding-x:         .75rem !default;
+Rinput-btn-font-family:       null !default;
+Rinput-btn-font-size:         Rfont-size-base !default;
+Rinput-btn-line-height:       Rline-height-base !default;
+
+Rinput-btn-focus-width:       .2rem !default;
+Rinput-btn-focus-color:       rgba(Rcomponent-active-bg, .25) !default;
+Rinput-btn-focus-box-shadow:  0 0 0 Rinput-btn-focus-width Rinput-btn-focus-color !default;
+
+Rinput-btn-padding-y-sm:      .25rem !default;
+Rinput-btn-padding-x-sm:      .5rem !default;
+Rinput-btn-font-size-sm:      Rfont-size-sm !default;
+Rinput-btn-line-height-sm:    Rline-height-sm !default;
+
+Rinput-btn-padding-y-lg:      .5rem !default;
+Rinput-btn-padding-x-lg:      1rem !default;
+Rinput-btn-font-size-lg:      Rfont-size-lg !default;
+Rinput-btn-line-height-lg:    Rline-height-lg !default;
+
+Rinput-btn-border-width:      Rborder-width !default;
+
+
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background, and border color.
+
+Rbtn-padding-y:               Rinput-btn-padding-y !default;
+Rbtn-padding-x:               Rinput-btn-padding-x !default;
+Rbtn-font-family:             Rinput-btn-font-family !default;
+Rbtn-font-size:               Rinput-btn-font-size !default;
+Rbtn-line-height:             Rinput-btn-line-height !default;
+Rbtn-white-space:             null !default; // Set to `nowrap` to prevent text wrapping
+
+Rbtn-padding-y-sm:            Rinput-btn-padding-y-sm !default;
+Rbtn-padding-x-sm:            Rinput-btn-padding-x-sm !default;
+Rbtn-font-size-sm:            Rinput-btn-font-size-sm !default;
+Rbtn-line-height-sm:          Rinput-btn-line-height-sm !default;
+
+Rbtn-padding-y-lg:            Rinput-btn-padding-y-lg !default;
+Rbtn-padding-x-lg:            Rinput-btn-padding-x-lg !default;
+Rbtn-font-size-lg:            Rinput-btn-font-size-lg !default;
+Rbtn-line-height-lg:          Rinput-btn-line-height-lg !default;
+
+Rbtn-border-width:            Rinput-btn-border-width !default;
+
+Rbtn-font-weight:             Rfont-weight-normal !default;
+Rbtn-box-shadow:              inset 0 1px 0 rgba(Rwhite, .15), 0 1px 1px rgba(Rblack, .075) !default;
+Rbtn-focus-width:             Rinput-btn-focus-width !default;
+Rbtn-focus-box-shadow:        Rinput-btn-focus-box-shadow !default;
+Rbtn-disabled-opacity:        .65 !default;
+Rbtn-active-box-shadow:       inset 0 3px 5px rgba(Rblack, .125) !default;
+
+Rbtn-link-disabled-color:     Rgray-600 !default;
+
+Rbtn-block-spacing-y:         .5rem !default;
+
+// Allows for customizing button radius independently from global border radius
+Rbtn-border-radius:           Rborder-radius !default;
+Rbtn-border-radius-lg:        Rborder-radius-lg !default;
+Rbtn-border-radius-sm:        Rborder-radius-sm !default;
+
+Rbtn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+
+
+// Forms
+
+Rlabel-margin-bottom:                   .5rem !default;
+
+Rinput-padding-y:                       Rinput-btn-padding-y !default;
+Rinput-padding-x:                       Rinput-btn-padding-x !default;
+Rinput-font-family:                     Rinput-btn-font-family !default;
+Rinput-font-size:                       Rinput-btn-font-size !default;
+Rinput-font-weight:                     Rfont-weight-base !default;
+Rinput-line-height:                     Rinput-btn-line-height !default;
+
+Rinput-padding-y-sm:                    Rinput-btn-padding-y-sm !default;
+Rinput-padding-x-sm:                    Rinput-btn-padding-x-sm !default;
+Rinput-font-size-sm:                    Rinput-btn-font-size-sm !default;
+Rinput-line-height-sm:                  Rinput-btn-line-height-sm !default;
+
+Rinput-padding-y-lg:                    Rinput-btn-padding-y-lg !default;
+Rinput-padding-x-lg:                    Rinput-btn-padding-x-lg !default;
+Rinput-font-size-lg:                    Rinput-btn-font-size-lg !default;
+Rinput-line-height-lg:                  Rinput-btn-line-height-lg !default;
+
+Rinput-bg:                              Rwhite !default;
+Rinput-disabled-bg:                     Rgray-200 !default;
+
+Rinput-color:                           Rgray-700 !default;
+Rinput-border-color:                    Rgray-400 !default;
+Rinput-border-width:                    Rinput-btn-border-width !default;
+Rinput-box-shadow:                      inset 0 1px 1px rgba(Rblack, .075) !default;
+
+Rinput-border-radius:                   Rborder-radius !default;
+Rinput-border-radius-lg:                Rborder-radius-lg !default;
+Rinput-border-radius-sm:                Rborder-radius-sm !default;
+
+Rinput-focus-bg:                        Rinput-bg !default;
+Rinput-focus-border-color:              lighten(Rcomponent-active-bg, 25%) !default;
+Rinput-focus-color:                     Rinput-color !default;
+Rinput-focus-width:                     Rinput-btn-focus-width !default;
+Rinput-focus-box-shadow:                Rinput-btn-focus-box-shadow !default;
+
+Rinput-placeholder-color:               Rgray-600 !default;
+Rinput-plaintext-color:                 Rbody-color !default;
+
+Rinput-height-border:                   Rinput-border-width * 2 !default;
+
+Rinput-height-inner:                    add(Rinput-line-height * 1em, Rinput-padding-y * 2) !default;
+Rinput-height-inner-half:               add(Rinput-line-height * .5em, Rinput-padding-y) !default;
+Rinput-height-inner-quarter:            add(Rinput-line-height * .25em, Rinput-padding-y / 2) !default;
+
+Rinput-height:                          add(Rinput-line-height * 1em, add(Rinput-padding-y * 2, Rinput-height-border, false)) !default;
+Rinput-height-sm:                       add(Rinput-line-height-sm * 1em, add(Rinput-padding-y-sm * 2, Rinput-height-border, false)) !default;
+Rinput-height-lg:                       add(Rinput-line-height-lg * 1em, add(Rinput-padding-y-lg * 2, Rinput-height-border, false)) !default;
+
+Rinput-transition:                      border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+
+Rform-text-margin-top:                  .25rem !default;
+
+Rform-check-input-gutter:               1.25rem !default;
+Rform-check-input-margin-y:             .3rem !default;
+Rform-check-input-margin-x:             .25rem !default;
+
+Rform-check-inline-margin-x:            .75rem !default;
+Rform-check-inline-input-margin-x:      .3125rem !default;
+
+Rform-grid-gutter-width:                10px !default;
+Rform-group-margin-bottom:              1rem !default;
+
+Rinput-group-addon-color:               Rinput-color !default;
+Rinput-group-addon-bg:                  Rgray-200 !default;
+Rinput-group-addon-border-color:        Rinput-border-color !default;
+
+Rcustom-forms-transition:               background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+
+Rcustom-control-gutter:                 .5rem !default;
+Rcustom-control-spacer-x:               1rem !default;
+Rcustom-control-cursor:                 null !default;
+
+Rcustom-control-indicator-size:         1rem !default;
+Rcustom-control-indicator-bg:           Rinput-bg !default;
+
+Rcustom-control-indicator-bg-size:      50% 50% !default;
+Rcustom-control-indicator-box-shadow:   Rinput-box-shadow !default;
+Rcustom-control-indicator-border-color: Rgray-500 !default;
+Rcustom-control-indicator-border-width: Rinput-border-width !default;
+
+Rcustom-control-label-color:            null !default;
+
+Rcustom-control-indicator-disabled-bg:          Rinput-disabled-bg !default;
+Rcustom-control-label-disabled-color:           Rgray-600 !default;
+
+Rcustom-control-indicator-checked-color:        Rcomponent-active-color !default;
+Rcustom-control-indicator-checked-bg:           Rcomponent-active-bg !default;
+Rcustom-control-indicator-checked-disabled-bg:  rgba(theme-color("primary"), .5) !default;
+Rcustom-control-indicator-checked-box-shadow:   null !default;
+Rcustom-control-indicator-checked-border-color: Rcustom-control-indicator-checked-bg !default;
+
+Rcustom-control-indicator-focus-box-shadow:     Rinput-focus-box-shadow !default;
+Rcustom-control-indicator-focus-border-color:   Rinput-focus-border-color !default;
+
+Rcustom-control-indicator-active-color:         Rcomponent-active-color !default;
+Rcustom-control-indicator-active-bg:            lighten(Rcomponent-active-bg, 35%) !default;
+Rcustom-control-indicator-active-box-shadow:    null !default;
+Rcustom-control-indicator-active-border-color:  Rcustom-control-indicator-active-bg !default;
+
+Rcustom-checkbox-indicator-border-radius:       Rborder-radius !default;
+Rcustom-checkbox-indicator-icon-checked:        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{Rcustom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/></svg>") !default;
+
+Rcustom-checkbox-indicator-indeterminate-bg:           Rcomponent-active-bg !default;
+Rcustom-checkbox-indicator-indeterminate-color:        Rcustom-control-indicator-checked-color !default;
+Rcustom-checkbox-indicator-icon-indeterminate:         url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'><path stroke='#{Rcustom-checkbox-indicator-indeterminate-color}' d='M0 2h4'/></svg>") !default;
+Rcustom-checkbox-indicator-indeterminate-box-shadow:   null !default;
+Rcustom-checkbox-indicator-indeterminate-border-color: Rcustom-checkbox-indicator-indeterminate-bg !default;
+
+Rcustom-radio-indicator-border-radius:          50% !default;
+Rcustom-radio-indicator-icon-checked:           url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'><circle r='3' fill='#{Rcustom-control-indicator-checked-color}'/></svg>") !default;
+
+Rcustom-switch-width:                           Rcustom-control-indicator-size * 1.75 !default;
+Rcustom-switch-indicator-border-radius:         Rcustom-control-indicator-size / 2 !default;
+Rcustom-switch-indicator-size:                  subtract(Rcustom-control-indicator-size, Rcustom-control-indicator-border-width * 4) !default;
+
+Rcustom-select-padding-y:           Rinput-padding-y !default;
+Rcustom-select-padding-x:           Rinput-padding-x !default;
+Rcustom-select-font-family:         Rinput-font-family !default;
+Rcustom-select-font-size:           Rinput-font-size !default;
+Rcustom-select-height:              Rinput-height !default;
+Rcustom-select-indicator-padding:   1rem !default; // Extra padding to account for the presence of the background-image based indicator
+Rcustom-select-font-weight:         Rinput-font-weight !default;
+Rcustom-select-line-height:         Rinput-line-height !default;
+Rcustom-select-color:               Rinput-color !default;
+Rcustom-select-disabled-color:      Rgray-600 !default;
+Rcustom-select-bg:                  Rinput-bg !default;
+Rcustom-select-disabled-bg:         Rgray-200 !default;
+Rcustom-select-bg-size:             8px 10px !default; // In pixels because image dimensions
+Rcustom-select-indicator-color:     Rgray-800 !default;
+Rcustom-select-indicator:           url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'><path fill='#{Rcustom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>") !default;
+Rcustom-select-background:          escape-svg(Rcustom-select-indicator) no-repeat right Rcustom-select-padding-x center / Rcustom-select-bg-size !default; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
+
+Rcustom-select-feedback-icon-padding-right: add(1em * .75, (2 * Rcustom-select-padding-y * .75) + Rcustom-select-padding-x + Rcustom-select-indicator-padding) !default;
+Rcustom-select-feedback-icon-position:      center right (Rcustom-select-padding-x + Rcustom-select-indicator-padding) !default;
+Rcustom-select-feedback-icon-size:          Rinput-height-inner-half Rinput-height-inner-half !default;
+
+Rcustom-select-border-width:        Rinput-border-width !default;
+Rcustom-select-border-color:        Rinput-border-color !default;
+Rcustom-select-border-radius:       Rborder-radius !default;
+Rcustom-select-box-shadow:          inset 0 1px 2px rgba(Rblack, .075) !default;
+
+Rcustom-select-focus-border-color:  Rinput-focus-border-color !default;
+Rcustom-select-focus-width:         Rinput-focus-width !default;
+Rcustom-select-focus-box-shadow:    0 0 0 Rcustom-select-focus-width Rinput-btn-focus-color !default;
+
+Rcustom-select-padding-y-sm:        Rinput-padding-y-sm !default;
+Rcustom-select-padding-x-sm:        Rinput-padding-x-sm !default;
+Rcustom-select-font-size-sm:        Rinput-font-size-sm !default;
+Rcustom-select-height-sm:           Rinput-height-sm !default;
+
+Rcustom-select-padding-y-lg:        Rinput-padding-y-lg !default;
+Rcustom-select-padding-x-lg:        Rinput-padding-x-lg !default;
+Rcustom-select-font-size-lg:        Rinput-font-size-lg !default;
+Rcustom-select-height-lg:           Rinput-height-lg !default;
+
+Rcustom-range-track-width:          100% !default;
+Rcustom-range-track-height:         .5rem !default;
+Rcustom-range-track-cursor:         pointer !default;
+Rcustom-range-track-bg:             Rgray-300 !default;
+Rcustom-range-track-border-radius:  1rem !default;
+Rcustom-range-track-box-shadow:     inset 0 .25rem .25rem rgba(Rblack, .1) !default;
+
+Rcustom-range-thumb-width:                   1rem !default;
+Rcustom-range-thumb-height:                  Rcustom-range-thumb-width !default;
+Rcustom-range-thumb-bg:                      Rcomponent-active-bg !default;
+Rcustom-range-thumb-border:                  0 !default;
+Rcustom-range-thumb-border-radius:           1rem !default;
+Rcustom-range-thumb-box-shadow:              0 .1rem .25rem rgba(Rblack, .1) !default;
+Rcustom-range-thumb-focus-box-shadow:        0 0 0 1px Rbody-bg, Rinput-focus-box-shadow !default;
+Rcustom-range-thumb-focus-box-shadow-width:  Rinput-focus-width !default; // For focus box shadow issue in IE/Edge
+Rcustom-range-thumb-active-bg:               lighten(Rcomponent-active-bg, 35%) !default;
+Rcustom-range-thumb-disabled-bg:             Rgray-500 !default;
+
+Rcustom-file-height:                Rinput-height !default;
+Rcustom-file-height-inner:          Rinput-height-inner !default;
+Rcustom-file-focus-border-color:    Rinput-focus-border-color !default;
+Rcustom-file-focus-box-shadow:      Rinput-focus-box-shadow !default;
+Rcustom-file-disabled-bg:           Rinput-disabled-bg !default;
+
+Rcustom-file-padding-y:             Rinput-padding-y !default;
+Rcustom-file-padding-x:             Rinput-padding-x !default;
+Rcustom-file-line-height:           Rinput-line-height !default;
+Rcustom-file-font-family:           Rinput-font-family !default;
+Rcustom-file-font-weight:           Rinput-font-weight !default;
+Rcustom-file-color:                 Rinput-color !default;
+Rcustom-file-bg:                    Rinput-bg !default;
+Rcustom-file-border-width:          Rinput-border-width !default;
+Rcustom-file-border-color:          Rinput-border-color !default;
+Rcustom-file-border-radius:         Rinput-border-radius !default;
+Rcustom-file-box-shadow:            Rinput-box-shadow !default;
+Rcustom-file-button-color:          Rcustom-file-color !default;
+Rcustom-file-button-bg:             Rinput-group-addon-bg !default;
+Rcustom-file-text: (
+  en: "Browse"
+) !default;
+
+
+// Form validation
+
+Rform-feedback-margin-top:          Rform-text-margin-top !default;
+Rform-feedback-font-size:           Rsmall-font-size !default;
+Rform-feedback-valid-color:         theme-color("success") !default;
+Rform-feedback-invalid-color:       theme-color("danger") !default;
+
+Rform-feedback-icon-valid-color:    Rform-feedback-valid-color !default;
+Rform-feedback-icon-valid:          url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{Rform-feedback-icon-valid-color}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/></svg>") !default;
+Rform-feedback-icon-invalid-color:  Rform-feedback-invalid-color !default;
+Rform-feedback-icon-invalid:        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='#{Rform-feedback-icon-invalid-color}' viewBox='0 0 12 12'><circle cx='6' cy='6' r='4.5'/><path stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/><circle cx='6' cy='8.2' r='.6' fill='#{Rform-feedback-icon-invalid-color}' stroke='none'/></svg>") !default;
+
+Rform-validation-states: () !default;
+Rform-validation-states: map-merge(
+  (
+    "valid": (
+      "color": Rform-feedback-valid-color,
+      "icon": Rform-feedback-icon-valid
+    ),
+    "invalid": (
+      "color": Rform-feedback-invalid-color,
+      "icon": Rform-feedback-icon-invalid
+    ),
+  ),
+  Rform-validation-states
+);
+
+// Z-index master list
+//
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+
+Rzindex-dropdown:                   1000 !default;
+Rzindex-sticky:                     1020 !default;
+Rzindex-fixed:                      1030 !default;
+Rzindex-modal-backdrop:             1040 !default;
+Rzindex-modal:                      1050 !default;
+Rzindex-popover:                    1060 !default;
+Rzindex-tooltip:                    1070 !default;
+
+
+// Navs
+
+Rnav-link-padding-y:                .5rem !default;
+Rnav-link-padding-x:                1rem !default;
+Rnav-link-disabled-color:           Rgray-600 !default;
+
+Rnav-tabs-border-color:             Rgray-300 !default;
+Rnav-tabs-border-width:             Rborder-width !default;
+Rnav-tabs-border-radius:            Rborder-radius !default;
+Rnav-tabs-link-hover-border-color:  Rgray-200 Rgray-200 Rnav-tabs-border-color !default;
+Rnav-tabs-link-active-color:        Rgray-700 !default;
+Rnav-tabs-link-active-bg:           Rbody-bg !default;
+Rnav-tabs-link-active-border-color: Rgray-300 Rgray-300 Rnav-tabs-link-active-bg !default;
+
+Rnav-pills-border-radius:           Rborder-radius !default;
+Rnav-pills-link-active-color:       Rcomponent-active-color !default;
+Rnav-pills-link-active-bg:          Rcomponent-active-bg !default;
+
+Rnav-divider-color:                 Rgray-200 !default;
+Rnav-divider-margin-y:              Rspacer / 2 !default;
+
+
+// Navbar
+
+Rnavbar-padding-y:                  Rspacer / 2 !default;
+Rnavbar-padding-x:                  Rspacer !default;
+
+Rnavbar-nav-link-padding-x:         .5rem !default;
+
+Rnavbar-brand-font-size:            Rfont-size-lg !default;
+// Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
+Rnav-link-height:                   Rfont-size-base * Rline-height-base + Rnav-link-padding-y * 2 !default;
+Rnavbar-brand-height:               Rnavbar-brand-font-size * Rline-height-base !default;
+Rnavbar-brand-padding-y:            (Rnav-link-height - Rnavbar-brand-height) / 2 !default;
+
+Rnavbar-toggler-padding-y:          .25rem !default;
+Rnavbar-toggler-padding-x:          .75rem !default;
+Rnavbar-toggler-font-size:          Rfont-size-lg !default;
+Rnavbar-toggler-border-radius:      Rbtn-border-radius !default;
+
+Rnavbar-dark-color:                 rgba(Rwhite, .5) !default;
+Rnavbar-dark-hover-color:           rgba(Rwhite, .75) !default;
+Rnavbar-dark-active-color:          Rwhite !default;
+Rnavbar-dark-disabled-color:        rgba(Rwhite, .25) !default;
+Rnavbar-dark-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{Rnavbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+Rnavbar-dark-toggler-border-color:  rgba(Rwhite, .1) !default;
+
+Rnavbar-light-color:                rgba(Rblack, .5) !default;
+Rnavbar-light-hover-color:          rgba(Rblack, .7) !default;
+Rnavbar-light-active-color:         rgba(Rblack, .9) !default;
+Rnavbar-light-disabled-color:       rgba(Rblack, .3) !default;
+Rnavbar-light-toggler-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{Rnavbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+Rnavbar-light-toggler-border-color: rgba(Rblack, .1) !default;
+
+Rnavbar-light-brand-color:                Rnavbar-light-active-color !default;
+Rnavbar-light-brand-hover-color:          Rnavbar-light-active-color !default;
+Rnavbar-dark-brand-color:                 Rnavbar-dark-active-color !default;
+Rnavbar-dark-brand-hover-color:           Rnavbar-dark-active-color !default;
+
+
+// Dropdowns
+//
+// Dropdown menu container and contents.
+
+Rdropdown-min-width:                10rem !default;
+Rdropdown-padding-x:                0 !default;
+Rdropdown-padding-y:                .5rem !default;
+Rdropdown-spacer:                   .125rem !default;
+Rdropdown-font-size:                Rfont-size-base !default;
+Rdropdown-color:                    Rbody-color !default;
+Rdropdown-bg:                       Rwhite !default;
+Rdropdown-border-color:             rgba(Rblack, .15) !default;
+Rdropdown-border-radius:            Rborder-radius !default;
+Rdropdown-border-width:             Rborder-width !default;
+Rdropdown-inner-border-radius:      subtract(Rdropdown-border-radius, Rdropdown-border-width) !default;
+Rdropdown-divider-bg:               Rgray-200 !default;
+Rdropdown-divider-margin-y:         Rnav-divider-margin-y !default;
+Rdropdown-box-shadow:               0 .5rem 1rem rgba(Rblack, .175) !default;
+
+Rdropdown-link-color:               Rgray-900 !default;
+Rdropdown-link-hover-color:         darken(Rgray-900, 5%) !default;
+Rdropdown-link-hover-bg:            Rgray-100 !default;
+
+Rdropdown-link-active-color:        Rcomponent-active-color !default;
+Rdropdown-link-active-bg:           Rcomponent-active-bg !default;
+
+Rdropdown-link-disabled-color:      Rgray-600 !default;
+
+Rdropdown-item-padding-y:           .25rem !default;
+Rdropdown-item-padding-x:           1.5rem !default;
+
+Rdropdown-header-color:             Rgray-600 !default;
+Rdropdown-header-padding:           Rdropdown-padding-y Rdropdown-item-padding-x !default;
+
+
+// Pagination
+
+Rpagination-padding-y:              .5rem !default;
+Rpagination-padding-x:              .75rem !default;
+Rpagination-padding-y-sm:           .25rem !default;
+Rpagination-padding-x-sm:           .5rem !default;
+Rpagination-padding-y-lg:           .75rem !default;
+Rpagination-padding-x-lg:           1.5rem !default;
+Rpagination-line-height:            1.25 !default;
+
+Rpagination-color:                  Rlink-color !default;
+Rpagination-bg:                     Rwhite !default;
+Rpagination-border-width:           Rborder-width !default;
+Rpagination-border-color:           Rgray-300 !default;
+
+Rpagination-focus-box-shadow:       Rinput-btn-focus-box-shadow !default;
+Rpagination-focus-outline:          0 !default;
+
+Rpagination-hover-color:            Rlink-hover-color !default;
+Rpagination-hover-bg:               Rgray-200 !default;
+Rpagination-hover-border-color:     Rgray-300 !default;
+
+Rpagination-active-color:           Rcomponent-active-color !default;
+Rpagination-active-bg:              Rcomponent-active-bg !default;
+Rpagination-active-border-color:    Rpagination-active-bg !default;
+
+Rpagination-disabled-color:         Rgray-600 !default;
+Rpagination-disabled-bg:            Rwhite !default;
+Rpagination-disabled-border-color:  Rgray-300 !default;
+
+
+// Jumbotron
+
+Rjumbotron-padding:                 2rem !default;
+Rjumbotron-color:                   null !default;
+Rjumbotron-bg:                      Rgray-200 !default;
+
+
+// Cards
+
+Rcard-spacer-y:                     .75rem !default;
+Rcard-spacer-x:                     1.25rem !default;
+Rcard-border-width:                 Rborder-width !default;
+Rcard-border-radius:                Rborder-radius !default;
+Rcard-border-color:                 rgba(Rblack, .125) !default;
+Rcard-inner-border-radius:          subtract(Rcard-border-radius, Rcard-border-width) !default;
+Rcard-cap-bg:                       rgba(Rblack, .03) !default;
+Rcard-cap-color:                    null !default;
+Rcard-height:                       null !default;
+Rcard-color:                        null !default;
+Rcard-bg:                           Rwhite !default;
+
+Rcard-img-overlay-padding:          1.25rem !default;
+
+Rcard-group-margin:                 Rgrid-gutter-width / 2 !default;
+Rcard-deck-margin:                  Rcard-group-margin !default;
+
+Rcard-columns-count:                3 !default;
+Rcard-columns-gap:                  1.25rem !default;
+Rcard-columns-margin:               Rcard-spacer-y !default;
+
+
+// Tooltips
+
+Rtooltip-font-size:                 Rfont-size-sm !default;
+Rtooltip-max-width:                 200px !default;
+Rtooltip-color:                     Rwhite !default;
+Rtooltip-bg:                        Rblack !default;
+Rtooltip-border-radius:             Rborder-radius !default;
+Rtooltip-opacity:                   .9 !default;
+Rtooltip-padding-y:                 .25rem !default;
+Rtooltip-padding-x:                 .5rem !default;
+Rtooltip-margin:                    0 !default;
+
+Rtooltip-arrow-width:               .8rem !default;
+Rtooltip-arrow-height:              .4rem !default;
+Rtooltip-arrow-color:               Rtooltip-bg !default;
+
+// Form tooltips must come after regular tooltips
+Rform-feedback-tooltip-padding-y:     Rtooltip-padding-y !default;
+Rform-feedback-tooltip-padding-x:     Rtooltip-padding-x !default;
+Rform-feedback-tooltip-font-size:     Rtooltip-font-size !default;
+Rform-feedback-tooltip-line-height:   Rline-height-base !default;
+Rform-feedback-tooltip-opacity:       Rtooltip-opacity !default;
+Rform-feedback-tooltip-border-radius: Rtooltip-border-radius !default;
+
+
+// Popovers
+
+Rpopover-font-size:                 Rfont-size-sm !default;
+Rpopover-bg:                        Rwhite !default;
+Rpopover-max-width:                 276px !default;
+Rpopover-border-width:              Rborder-width !default;
+Rpopover-border-color:              rgba(Rblack, .2) !default;
+Rpopover-border-radius:             Rborder-radius-lg !default;
+Rpopover-inner-border-radius:       subtract(Rpopover-border-radius, Rpopover-border-width) !default;
+Rpopover-box-shadow:                0 .25rem .5rem rgba(Rblack, .2) !default;
+
+Rpopover-header-bg:                 darken(Rpopover-bg, 3%) !default;
+Rpopover-header-color:              Rheadings-color !default;
+Rpopover-header-padding-y:          .5rem !default;
+Rpopover-header-padding-x:          .75rem !default;
+
+Rpopover-body-color:                Rbody-color !default;
+Rpopover-body-padding-y:            Rpopover-header-padding-y !default;
+Rpopover-body-padding-x:            Rpopover-header-padding-x !default;
+
+Rpopover-arrow-width:               1rem !default;
+Rpopover-arrow-height:              .5rem !default;
+Rpopover-arrow-color:               Rpopover-bg !default;
+
+Rpopover-arrow-outer-color:         fade-in(Rpopover-border-color, .05) !default;
+
+
+// Toasts
+
+Rtoast-max-width:                   350px !default;
+Rtoast-padding-x:                   .75rem !default;
+Rtoast-padding-y:                   .25rem !default;
+Rtoast-font-size:                   .875rem !default;
+Rtoast-color:                       null !default;
+Rtoast-background-color:            rgba(Rwhite, .85) !default;
+Rtoast-border-width:                1px !default;
+Rtoast-border-color:                rgba(0, 0, 0, .1) !default;
+Rtoast-border-radius:               .25rem !default;
+Rtoast-box-shadow:                  0 .25rem .75rem rgba(Rblack, .1) !default;
+
+Rtoast-header-color:                Rgray-600 !default;
+Rtoast-header-background-color:     rgba(Rwhite, .85) !default;
+Rtoast-header-border-color:         rgba(0, 0, 0, .05) !default;
+
+
+// Badges
+
+Rbadge-font-size:                   75% !default;
+Rbadge-font-weight:                 Rfont-weight-bold !default;
+Rbadge-padding-y:                   .25em !default;
+Rbadge-padding-x:                   .4em !default;
+Rbadge-border-radius:               Rborder-radius !default;
+
+Rbadge-transition:                  Rbtn-transition !default;
+Rbadge-focus-width:                 Rinput-btn-focus-width !default;
+
+Rbadge-pill-padding-x:              .6em !default;
+// Use a higher than normal value to ensure completely rounded edges when
+// customizing padding or font-size on labels.
+Rbadge-pill-border-radius:          10rem !default;
+
+
+// Modals
+
+// Padding applied to the modal body
+Rmodal-inner-padding:               1rem !default;
+
+// Margin between elements in footer, must be lower than or equal to 2 * Rmodal-inner-padding
+Rmodal-footer-margin-between:       .5rem !default;
+
+Rmodal-dialog-margin:               .5rem !default;
+Rmodal-dialog-margin-y-sm-up:       1.75rem !default;
+
+Rmodal-title-line-height:           Rline-height-base !default;
+
+Rmodal-content-color:               null !default;
+Rmodal-content-bg:                  Rwhite !default;
+Rmodal-content-border-color:        rgba(Rblack, .2) !default;
+Rmodal-content-border-width:        Rborder-width !default;
+Rmodal-content-border-radius:       Rborder-radius-lg !default;
+Rmodal-content-inner-border-radius: subtract(Rmodal-content-border-radius, Rmodal-content-border-width) !default;
+Rmodal-content-box-shadow-xs:       0 .25rem .5rem rgba(Rblack, .5) !default;
+Rmodal-content-box-shadow-sm-up:    0 .5rem 1rem rgba(Rblack, .5) !default;
+
+Rmodal-backdrop-bg:                 Rblack !default;
+Rmodal-backdrop-opacity:            .5 !default;
+Rmodal-header-border-color:         Rborder-color !default;
+Rmodal-footer-border-color:         Rmodal-header-border-color !default;
+Rmodal-header-border-width:         Rmodal-content-border-width !default;
+Rmodal-footer-border-width:         Rmodal-header-border-width !default;
+Rmodal-header-padding-y:            1rem !default;
+Rmodal-header-padding-x:            1rem !default;
+Rmodal-header-padding:              Rmodal-header-padding-y Rmodal-header-padding-x !default; // Keep this for backwards compatibility
+
+Rmodal-xl:                          1140px !default;
+Rmodal-lg:                          800px !default;
+Rmodal-md:                          500px !default;
+Rmodal-sm:                          300px !default;
+
+Rmodal-fade-transform:              translate(0, -50px) !default;
+Rmodal-show-transform:              none !default;
+Rmodal-transition:                  transform .3s ease-out !default;
+Rmodal-scale-transform:             scale(1.02) !default;
+
+
+// Alerts
+//
+// Define alert colors, border radius, and padding.
+
+Ralert-padding-y:                   .75rem !default;
+Ralert-padding-x:                   1.25rem !default;
+Ralert-margin-bottom:               1rem !default;
+Ralert-border-radius:               Rborder-radius !default;
+Ralert-link-font-weight:            Rfont-weight-bold !default;
+Ralert-border-width:                Rborder-width !default;
+
+Ralert-bg-level:                    -10 !default;
+Ralert-border-level:                -9 !default;
+Ralert-color-level:                 6 !default;
+
+
+// Progress bars
+
+Rprogress-height:                   1rem !default;
+Rprogress-font-size:                Rfont-size-base * .75 !default;
+Rprogress-bg:                       Rgray-200 !default;
+Rprogress-border-radius:            Rborder-radius !default;
+Rprogress-box-shadow:               inset 0 .1rem .1rem rgba(Rblack, .1) !default;
+Rprogress-bar-color:                Rwhite !default;
+Rprogress-bar-bg:                   theme-color("primary") !default;
+Rprogress-bar-animation-timing:     1s linear infinite !default;
+Rprogress-bar-transition:           width .6s ease !default;
+
+
+// List group
+
+Rlist-group-color:                  null !default;
+Rlist-group-bg:                     Rwhite !default;
+Rlist-group-border-color:           rgba(Rblack, .125) !default;
+Rlist-group-border-width:           Rborder-width !default;
+Rlist-group-border-radius:          Rborder-radius !default;
+
+Rlist-group-item-padding-y:         .75rem !default;
+Rlist-group-item-padding-x:         1.25rem !default;
+
+Rlist-group-hover-bg:               Rgray-100 !default;
+Rlist-group-active-color:           Rcomponent-active-color !default;
+Rlist-group-active-bg:              Rcomponent-active-bg !default;
+Rlist-group-active-border-color:    Rlist-group-active-bg !default;
+
+Rlist-group-disabled-color:         Rgray-600 !default;
+Rlist-group-disabled-bg:            Rlist-group-bg !default;
+
+Rlist-group-action-color:           Rgray-700 !default;
+Rlist-group-action-hover-color:     Rlist-group-action-color !default;
+
+Rlist-group-action-active-color:    Rbody-color !default;
+Rlist-group-action-active-bg:       Rgray-200 !default;
+
+
+// Image thumbnails
+
+Rthumbnail-padding:                 .25rem !default;
+Rthumbnail-bg:                      Rbody-bg !default;
+Rthumbnail-border-width:            Rborder-width !default;
+Rthumbnail-border-color:            Rgray-300 !default;
+Rthumbnail-border-radius:           Rborder-radius !default;
+Rthumbnail-box-shadow:              0 1px 2px rgba(Rblack, .075) !default;
+
+
+// Figures
+
+Rfigure-caption-font-size:          90% !default;
+Rfigure-caption-color:              Rgray-600 !default;
+
+
+// Breadcrumbs
+
+Rbreadcrumb-font-size:              null !default;
+
+Rbreadcrumb-padding-y:              .75rem !default;
+Rbreadcrumb-padding-x:              1rem !default;
+Rbreadcrumb-item-padding:           .5rem !default;
+
+Rbreadcrumb-margin-bottom:          1rem !default;
+
+Rbreadcrumb-bg:                     Rgray-200 !default;
+Rbreadcrumb-divider-color:          Rgray-600 !default;
+Rbreadcrumb-active-color:           Rgray-600 !default;
+Rbreadcrumb-divider:                quote("/") !default;
+
+Rbreadcrumb-border-radius:          Rborder-radius !default;
+
+
+// Carousel
+
+Rcarousel-control-color:             Rwhite !default;
+Rcarousel-control-width:             15% !default;
+Rcarousel-control-opacity:           .5 !default;
+Rcarousel-control-hover-opacity:     .9 !default;
+Rcarousel-control-transition:        opacity .15s ease !default;
+
+Rcarousel-indicator-width:           30px !default;
+Rcarousel-indicator-height:          3px !default;
+Rcarousel-indicator-hit-area-height: 10px !default;
+Rcarousel-indicator-spacer:          3px !default;
+Rcarousel-indicator-active-bg:       Rwhite !default;
+Rcarousel-indicator-transition:      opacity .6s ease !default;
+
+Rcarousel-caption-width:             70% !default;
+Rcarousel-caption-color:             Rwhite !default;
+
+Rcarousel-control-icon-width:        20px !default;
+
+Rcarousel-control-prev-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='#{Rcarousel-control-color}' width='8' height='8' viewBox='0 0 8 8'><path d='M5.25 0l-4 4 4 4 1.5-1.5L4.25 4l2.5-2.5L5.25 0z'/></svg>") !default;
+Rcarousel-control-next-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='#{Rcarousel-control-color}' width='8' height='8' viewBox='0 0 8 8'><path d='M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z'/></svg>") !default;
+
+Rcarousel-transition-duration:       .6s !default;
+Rcarousel-transition:                transform Rcarousel-transition-duration ease-in-out !default; // Define transform transition first if using multiple transitions (e.g., `transform 2s ease, opacity .5s ease-out`)
+
+
+// Spinners
+
+Rspinner-width:         2rem !default;
+Rspinner-height:        Rspinner-width !default;
+Rspinner-border-width:  .25em !default;
+
+Rspinner-width-sm:        1rem !default;
+Rspinner-height-sm:       Rspinner-width-sm !default;
+Rspinner-border-width-sm: .2em !default;
+
+
+// Close
+
+Rclose-font-size:                   Rfont-size-base * 1.5 !default;
+Rclose-font-weight:                 Rfont-weight-bold !default;
+Rclose-color:                       Rblack !default;
+Rclose-text-shadow:                 0 1px 0 Rwhite !default;
+
+
+// Code
+
+Rcode-font-size:                    87.5% !default;
+Rcode-color:                        Rpink !default;
+
+Rkbd-padding-y:                     .2rem !default;
+Rkbd-padding-x:                     .4rem !default;
+Rkbd-font-size:                     Rcode-font-size !default;
+Rkbd-color:                         Rwhite !default;
+Rkbd-bg:                            Rgray-900 !default;
+
+Rpre-color:                         Rgray-900 !default;
+Rpre-scrollable-max-height:         340px !default;
+
+
+// Utilities
+
+Rdisplays: none, inline, inline-block, block, table, table-row, table-cell, flex, inline-flex !default;
+Roverflows: auto, hidden !default;
+Rpositions: static, relative, absolute, fixed, sticky !default;
+Ruser-selects: all, auto, none !default;
+
+
+// Printing
+
+Rprint-page-size:                   a3 !default;
+Rprint-body-min-width:              map-get(Rgrid-breakpoints, "lg") !default;

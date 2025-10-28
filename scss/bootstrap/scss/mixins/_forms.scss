@@ -1,0 +1,178 @@
+// Form control focus state
+//
+// Generate a customized focus state and for any input with the specified color,
+// which defaults to the `Rinput-focus-border-color` variable.
+//
+// We highly encourage you to not customize the default value, but instead use
+// this to tweak colors on an as-needed basis. This aesthetic change is based on
+// WebKit's default styles, but applicable to a wider range of browsers. Its
+// usability and accessibility should be taken into account with any change.
+//
+// Example usage: change the default blue border and shadow to white for better
+// contrast against a dark gray background.
+@mixin form-control-focus(Rignore-warning: false) {
+  &:focus {
+    color: Rinput-focus-color;
+    background-color: Rinput-focus-bg;
+    border-color: Rinput-focus-border-color;
+    outline: 0;
+    @if Renable-shadows {
+      @include box-shadow(Rinput-box-shadow, Rinput-focus-box-shadow);
+    } @else {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      box-shadow: Rinput-focus-box-shadow;
+    }
+  }
+  @include deprecate("The `form-control-focus()` mixin", "v4.4.0", "v5", Rignore-warning);
+}
+
+// This mixin uses an `if()` technique to be compatible with Dart Sass
+// See https://github.com/sass/sass/issues/1873#issuecomment-152293725 for more details
+@mixin form-validation-state-selector(Rstate) {
+  @if (Rstate == "valid" or Rstate == "invalid") {
+    .was-validated #{if(&, "&", "")}:#{Rstate},
+    #{if(&, "&", "")}.is-#{Rstate} {
+      @content;
+    }
+  } @else {
+    #{if(&, "&", "")}.is-#{Rstate} {
+      @content;
+    }
+  }
+}
+
+@mixin form-validation-state(Rstate, Rcolor, Ricon) {
+  .#{Rstate}-feedback {
+    display: none;
+    width: 100%;
+    margin-top: Rform-feedback-margin-top;
+    @include font-size(Rform-feedback-font-size);
+    color: Rcolor;
+  }
+
+  .#{Rstate}-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 5;
+    display: none;
+    max-width: 100%; // Contain to parent when possible
+    padding: Rform-feedback-tooltip-padding-y Rform-feedback-tooltip-padding-x;
+    margin-top: .1rem;
+    @include font-size(Rform-feedback-tooltip-font-size);
+    line-height: Rform-feedback-tooltip-line-height;
+    color: color-yiq(Rcolor);
+    background-color: rgba(Rcolor, Rform-feedback-tooltip-opacity);
+    @include border-radius(Rform-feedback-tooltip-border-radius);
+  }
+
+  @include form-validation-state-selector(Rstate) {
+    ~ .#{Rstate}-feedback,
+    ~ .#{Rstate}-tooltip {
+      display: block;
+    }
+  }
+
+  .form-control {
+    @include form-validation-state-selector(Rstate) {
+      border-color: Rcolor;
+
+      @if Renable-validation-icons {
+        padding-right: Rinput-height-inner;
+        background-image: escape-svg(Ricon);
+        background-repeat: no-repeat;
+        background-position: right Rinput-height-inner-quarter center;
+        background-size: Rinput-height-inner-half Rinput-height-inner-half;
+      }
+
+      &:focus {
+        border-color: Rcolor;
+        box-shadow: 0 0 0 Rinput-focus-width rgba(Rcolor, .25);
+      }
+    }
+  }
+
+  // stylelint-disable-next-line selector-no-qualifying-type
+  textarea.form-control {
+    @include form-validation-state-selector(Rstate) {
+      @if Renable-validation-icons {
+        padding-right: Rinput-height-inner;
+        background-position: top Rinput-height-inner-quarter right Rinput-height-inner-quarter;
+      }
+    }
+  }
+
+  .custom-select {
+    @include form-validation-state-selector(Rstate) {
+      border-color: Rcolor;
+
+      @if Renable-validation-icons {
+        padding-right: Rcustom-select-feedback-icon-padding-right;
+        background: Rcustom-select-background, escape-svg(Ricon) Rcustom-select-bg no-repeat Rcustom-select-feedback-icon-position / Rcustom-select-feedback-icon-size;
+      }
+
+      &:focus {
+        border-color: Rcolor;
+        box-shadow: 0 0 0 Rinput-focus-width rgba(Rcolor, .25);
+      }
+    }
+  }
+
+  .form-check-input {
+    @include form-validation-state-selector(Rstate) {
+      ~ .form-check-label {
+        color: Rcolor;
+      }
+
+      ~ .#{Rstate}-feedback,
+      ~ .#{Rstate}-tooltip {
+        display: block;
+      }
+    }
+  }
+
+  .custom-control-input {
+    @include form-validation-state-selector(Rstate) {
+      ~ .custom-control-label {
+        color: Rcolor;
+
+        &::before {
+          border-color: Rcolor;
+        }
+      }
+
+      &:checked {
+        ~ .custom-control-label::before {
+          border-color: lighten(Rcolor, 10%);
+          @include gradient-bg(lighten(Rcolor, 10%));
+        }
+      }
+
+      &:focus {
+        ~ .custom-control-label::before {
+          box-shadow: 0 0 0 Rinput-focus-width rgba(Rcolor, .25);
+        }
+
+        &:not(:checked) ~ .custom-control-label::before {
+          border-color: Rcolor;
+        }
+      }
+    }
+  }
+
+  // custom file
+  .custom-file-input {
+    @include form-validation-state-selector(Rstate) {
+      ~ .custom-file-label {
+        border-color: Rcolor;
+      }
+
+      &:focus {
+        ~ .custom-file-label {
+          border-color: Rcolor;
+          box-shadow: 0 0 0 Rinput-focus-width rgba(Rcolor, .25);
+        }
+      }
+    }
+  }
+}

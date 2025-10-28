@@ -1,0 +1,23 @@
+// stylelint-disable declaration-no-important
+
+// Contextual backgrounds
+
+@mixin bg-variant(Rparent, Rcolor, Rignore-warning: false) {
+  #{Rparent} {
+    background-color: Rcolor !important;
+  }
+  a#{Rparent},
+  button#{Rparent} {
+    @include hover-focus() {
+      background-color: darken(Rcolor, 10%) !important;
+    }
+  }
+  @include deprecate("The `bg-variant` mixin", "v4.4.0", "v5", Rignore-warning);
+}
+
+@mixin bg-gradient-variant(Rparent, Rcolor, Rignore-warning: false) {
+  #{Rparent} {
+    background: Rcolor linear-gradient(180deg, mix(Rbody-bg, Rcolor, 15%), Rcolor) repeat-x !important;
+  }
+  @include deprecate("The `bg-gradient-variant` mixin", "v4.5.0", "v5", Rignore-warning);
+}

@@ -1,0 +1,10 @@
+// Deprecate mixin
+//
+// This mixin can be used to deprecate mixins or functions.
+// `Renable-deprecation-messages` is a global variable, `Rignore-warning` is a variable that can be passed to
+// some deprecated mixins to suppress the warning (for example if the mixin is still be used in the current version of Bootstrap)
+@mixin deprecate(Rname, Rdeprecate-version, Rremove-version, Rignore-warning: false) {
+  @if (Renable-deprecation-messages != false and Rignore-warning != true) {
+    @warn "#{Rname} has been deprecated as of #{Rdeprecate-version}. It will be removed entirely in #{Rremove-version}.";
+  }
+}

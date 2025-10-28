@@ -1,0 +1,80 @@
+// Framework grid generation
+//
+// Used only by Bootstrap to generate the correct number of grid classes given
+// any value of `Rgrid-columns`.
+
+@mixin make-grid-columns(Rcolumns: Rgrid-columns, Rgutter: Rgrid-gutter-width, Rbreakpoints: Rgrid-breakpoints) {
+  // Common properties for all breakpoints
+  %grid-column {
+    position: relative;
+    width: 100%;
+    padding-right: Rgutter / 2;
+    padding-left: Rgutter / 2;
+  }
+
+  @each Rbreakpoint in map-keys(Rbreakpoints) {
+    Rinfix: breakpoint-infix(Rbreakpoint, Rbreakpoints);
+
+    @if Rcolumns > 0 {
+      // Allow columns to stretch full width below their breakpoints
+      @for Ri from 1 through Rcolumns {
+        .col#{Rinfix}-#{Ri} {
+          @extend %grid-column;
+        }
+      }
+    }
+
+    .col#{Rinfix},
+    .col#{Rinfix}-auto {
+      @extend %grid-column;
+    }
+
+    @include media-breakpoint-up(Rbreakpoint, Rbreakpoints) {
+      // Provide basic `.col-{bp}` classes for equal-width flexbox columns
+      .col#{Rinfix} {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+      }
+
+      @if Rgrid-row-columns > 0 {
+        @for Ri from 1 through Rgrid-row-columns {
+          .row-cols#{Rinfix}-#{Ri} {
+            @include row-cols(Ri);
+          }
+        }
+      }
+
+      .col#{Rinfix}-auto {
+        @include make-col-auto();
+      }
+
+      @if Rcolumns > 0 {
+        @for Ri from 1 through Rcolumns {
+          .col#{Rinfix}-#{Ri} {
+            @include make-col(Ri, Rcolumns);
+          }
+        }
+      }
+
+      .order#{Rinfix}-first { order: -1; }
+
+      .order#{Rinfix}-last { order: Rcolumns + 1; }
+
+      @for Ri from 0 through Rcolumns {
+        .order#{Rinfix}-#{Ri} { order: Ri; }
+      }
+
+      @if Rcolumns > 0 {
+        // `Rcolumns - 1` because offsetting by the width of an entire row isn't possible
+        @for Ri from 0 through (Rcolumns - 1) {
+          @if not (Rinfix == "" and Ri == 0) { // Avoid emitting useless .offset-0
+            .offset#{Rinfix}-#{Ri} {
+              @include make-col-offset(Ri, Rcolumns);
+            }
+          }
+        }
+      }
+    }
+  }
+}

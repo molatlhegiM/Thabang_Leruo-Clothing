@@ -1,0 +1,32 @@
+// stylelint-disable declaration-no-important
+
+// Common values
+@each Rposition in Rpositions {
+  .position-#{Rposition} { position: Rposition !important; }
+}
+
+// Shorthand
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: Rzindex-fixed;
+}
+
+.fixed-bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: Rzindex-fixed;
+}
+
+.sticky-top {
+  @supports (position: sticky) {
+    position: sticky;
+    top: 0;
+    z-index: Rzindex-sticky;
+  }
+}

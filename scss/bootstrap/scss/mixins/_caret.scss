@@ -1,0 +1,62 @@
+@mixin caret-down() {
+  border-top: Rcaret-width solid;
+  border-right: Rcaret-width solid transparent;
+  border-bottom: 0;
+  border-left: Rcaret-width solid transparent;
+}
+
+@mixin caret-up() {
+  border-top: 0;
+  border-right: Rcaret-width solid transparent;
+  border-bottom: Rcaret-width solid;
+  border-left: Rcaret-width solid transparent;
+}
+
+@mixin caret-right() {
+  border-top: Rcaret-width solid transparent;
+  border-right: 0;
+  border-bottom: Rcaret-width solid transparent;
+  border-left: Rcaret-width solid;
+}
+
+@mixin caret-left() {
+  border-top: Rcaret-width solid transparent;
+  border-right: Rcaret-width solid;
+  border-bottom: Rcaret-width solid transparent;
+}
+
+@mixin caret(Rdirection: down) {
+  @if Renable-caret {
+    &::after {
+      display: inline-block;
+      margin-left: Rcaret-spacing;
+      vertical-align: Rcaret-vertical-align;
+      content: "";
+      @if Rdirection == down {
+        @include caret-down();
+      } @else if Rdirection == up {
+        @include caret-up();
+      } @else if Rdirection == right {
+        @include caret-right();
+      }
+    }
+
+    @if Rdirection == left {
+      &::after {
+        display: none;
+      }
+
+      &::before {
+        display: inline-block;
+        margin-right: Rcaret-spacing;
+        vertical-align: Rcaret-vertical-align;
+        content: "";
+        @include caret-left();
+      }
+    }
+
+    &:empty::after {
+      margin-left: 0;
+    }
+  }
+}

@@ -1,0 +1,69 @@
+/// Grid system
+//
+// Generate semantic grid columns with these mixins.
+
+@mixin make-container(Rgutter: Rgrid-gutter-width) {
+  width: 100%;
+  padding-right: Rgutter / 2;
+  padding-left: Rgutter / 2;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin make-row(Rgutter: Rgrid-gutter-width) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -Rgutter / 2;
+  margin-left: -Rgutter / 2;
+}
+
+// For each breakpoint, define the maximum width of the container in a media query
+@mixin make-container-max-widths(Rmax-widths: Rcontainer-max-widths, Rbreakpoints: Rgrid-breakpoints) {
+  @each Rbreakpoint, Rcontainer-max-width in Rmax-widths {
+    @include media-breakpoint-up(Rbreakpoint, Rbreakpoints) {
+      max-width: Rcontainer-max-width;
+    }
+  }
+  @include deprecate("The `make-container-max-widths` mixin", "v4.5.2", "v5");
+}
+
+@mixin make-col-ready(Rgutter: Rgrid-gutter-width) {
+  position: relative;
+  // Prevent columns from becoming too narrow when at smaller grid tiers by
+  // always setting `width: 100%;`. This works because we use `flex` values
+  // later on to override this initial width.
+  width: 100%;
+  padding-right: Rgutter / 2;
+  padding-left: Rgutter / 2;
+}
+
+@mixin make-col(Rsize, Rcolumns: Rgrid-columns) {
+  flex: 0 0 percentage(Rsize / Rcolumns);
+  // Add a `max-width` to ensure content within each column does not blow out
+  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+  // do not appear to require this.
+  max-width: percentage(Rsize / Rcolumns);
+}
+
+@mixin make-col-auto() {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%; // Reset earlier grid tiers
+}
+
+@mixin make-col-offset(Rsize, Rcolumns: Rgrid-columns) {
+  Rnum: Rsize / Rcolumns;
+  margin-left: if(Rnum == 0, 0, percentage(Rnum));
+}
+
+// Row columns
+//
+// Specify on a parent element(e.g., .row) to force immediate children into NN
+// numberof columns. Supports wrapping to new lines, but does not do a Masonry
+// style grid.
+@mixin row-cols(Rcount) {
+  > * {
+    flex: 0 0 100% / Rcount;
+    max-width: 100% / Rcount;
+  }
+}

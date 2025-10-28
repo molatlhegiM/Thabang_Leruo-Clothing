@@ -1,0 +1,47 @@
+// Disable animation if transitions are disabled
+@if Renable-transitions {
+  @keyframes progress-bar-stripes {
+    from { background-position: Rprogress-height 0; }
+    to { background-position: 0 0; }
+  }
+}
+
+.progress {
+  display: flex;
+  height: Rprogress-height;
+  overflow: hidden; // force rounded corners by cropping it
+  line-height: 0;
+  @include font-size(Rprogress-font-size);
+  background-color: Rprogress-bg;
+  @include border-radius(Rprogress-border-radius);
+  @include box-shadow(Rprogress-box-shadow);
+}
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: Rprogress-bar-color;
+  text-align: center;
+  white-space: nowrap;
+  background-color: Rprogress-bar-bg;
+  @include transition(Rprogress-bar-transition);
+}
+
+.progress-bar-striped {
+  @include gradient-striped();
+  background-size: Rprogress-height Rprogress-height;
+}
+
+@if Renable-transitions {
+  .progress-bar-animated {
+    animation: progress-bar-stripes Rprogress-bar-animation-timing;
+
+    @if Renable-prefers-reduced-motion-media-query {
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+  }
+}

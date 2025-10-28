@@ -1,0 +1,46 @@
+.toast {
+  // Prevents from shrinking in IE11, when in a flex container
+  // See https://github.com/twbs/bootstrap/issues/28341
+  flex-basis: Rtoast-max-width;
+  max-width: Rtoast-max-width;
+  @include font-size(Rtoast-font-size);
+  color: Rtoast-color;
+  background-color: Rtoast-background-color;
+  background-clip: padding-box;
+  border: Rtoast-border-width solid Rtoast-border-color;
+  box-shadow: Rtoast-box-shadow;
+  opacity: 0;
+  @include border-radius(Rtoast-border-radius);
+
+  &:not(:last-child) {
+    margin-bottom: Rtoast-padding-x;
+  }
+
+  &.showing {
+    opacity: 1;
+  }
+
+  &.show {
+    display: block;
+    opacity: 1;
+  }
+
+  &.hide {
+    display: none;
+  }
+}
+
+.toast-header {
+  display: flex;
+  align-items: center;
+  padding: Rtoast-padding-y Rtoast-padding-x;
+  color: Rtoast-header-color;
+  background-color: Rtoast-header-background-color;
+  background-clip: padding-box;
+  border-bottom: Rtoast-border-width solid Rtoast-header-border-color;
+  @include border-top-radius(subtract(Rtoast-border-radius, Rtoast-border-width));
+}
+
+.toast-body {
+  padding: Rtoast-padding-x; // apply to both vertical and horizontal
+}

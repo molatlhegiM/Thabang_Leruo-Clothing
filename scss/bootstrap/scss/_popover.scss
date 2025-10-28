@@ -1,0 +1,170 @@
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: Rzindex-popover;
+  display: block;
+  max-width: Rpopover-max-width;
+  // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
+  // So reset our font and text properties to avoid inheriting weird values.
+  @include reset-text();
+  @include font-size(Rpopover-font-size);
+  // Allow breaking very long words so they don't overflow the popover's bounds
+  word-wrap: break-word;
+  background-color: Rpopover-bg;
+  background-clip: padding-box;
+  border: Rpopover-border-width solid Rpopover-border-color;
+  @include border-radius(Rpopover-border-radius);
+  @include box-shadow(Rpopover-box-shadow);
+
+  .arrow {
+    position: absolute;
+    display: block;
+    width: Rpopover-arrow-width;
+    height: Rpopover-arrow-height;
+    margin: 0 Rpopover-border-radius;
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      content: "";
+      border-color: transparent;
+      border-style: solid;
+    }
+  }
+}
+
+.bs-popover-top {
+  margin-bottom: Rpopover-arrow-height;
+
+  > .arrow {
+    bottom: subtract(-Rpopover-arrow-height, Rpopover-border-width);
+
+    &::before {
+      bottom: 0;
+      border-width: Rpopover-arrow-height (Rpopover-arrow-width / 2) 0;
+      border-top-color: Rpopover-arrow-outer-color;
+    }
+
+    &::after {
+      bottom: Rpopover-border-width;
+      border-width: Rpopover-arrow-height (Rpopover-arrow-width / 2) 0;
+      border-top-color: Rpopover-arrow-color;
+    }
+  }
+}
+
+.bs-popover-right {
+  margin-left: Rpopover-arrow-height;
+
+  > .arrow {
+    left: subtract(-Rpopover-arrow-height, Rpopover-border-width);
+    width: Rpopover-arrow-height;
+    height: Rpopover-arrow-width;
+    margin: Rpopover-border-radius 0; // make sure the arrow does not touch the popover's rounded corners
+
+    &::before {
+      left: 0;
+      border-width: (Rpopover-arrow-width / 2) Rpopover-arrow-height (Rpopover-arrow-width / 2) 0;
+      border-right-color: Rpopover-arrow-outer-color;
+    }
+
+    &::after {
+      left: Rpopover-border-width;
+      border-width: (Rpopover-arrow-width / 2) Rpopover-arrow-height (Rpopover-arrow-width / 2) 0;
+      border-right-color: Rpopover-arrow-color;
+    }
+  }
+}
+
+.bs-popover-bottom {
+  margin-top: Rpopover-arrow-height;
+
+  > .arrow {
+    top: subtract(-Rpopover-arrow-height, Rpopover-border-width);
+
+    &::before {
+      top: 0;
+      border-width: 0 (Rpopover-arrow-width / 2) Rpopover-arrow-height (Rpopover-arrow-width / 2);
+      border-bottom-color: Rpopover-arrow-outer-color;
+    }
+
+    &::after {
+      top: Rpopover-border-width;
+      border-width: 0 (Rpopover-arrow-width / 2) Rpopover-arrow-height (Rpopover-arrow-width / 2);
+      border-bottom-color: Rpopover-arrow-color;
+    }
+  }
+
+  // This will remove the popover-header's border just below the arrow
+  .popover-header::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: block;
+    width: Rpopover-arrow-width;
+    margin-left: -Rpopover-arrow-width / 2;
+    content: "";
+    border-bottom: Rpopover-border-width solid Rpopover-header-bg;
+  }
+}
+
+.bs-popover-left {
+  margin-right: Rpopover-arrow-height;
+
+  > .arrow {
+    right: subtract(-Rpopover-arrow-height, Rpopover-border-width);
+    width: Rpopover-arrow-height;
+    height: Rpopover-arrow-width;
+    margin: Rpopover-border-radius 0; // make sure the arrow does not touch the popover's rounded corners
+
+    &::before {
+      right: 0;
+      border-width: (Rpopover-arrow-width / 2) 0 (Rpopover-arrow-width / 2) Rpopover-arrow-height;
+      border-left-color: Rpopover-arrow-outer-color;
+    }
+
+    &::after {
+      right: Rpopover-border-width;
+      border-width: (Rpopover-arrow-width / 2) 0 (Rpopover-arrow-width / 2) Rpopover-arrow-height;
+      border-left-color: Rpopover-arrow-color;
+    }
+  }
+}
+
+.bs-popover-auto {
+  &[x-placement^="top"] {
+    @extend .bs-popover-top;
+  }
+  &[x-placement^="right"] {
+    @extend .bs-popover-right;
+  }
+  &[x-placement^="bottom"] {
+    @extend .bs-popover-bottom;
+  }
+  &[x-placement^="left"] {
+    @extend .bs-popover-left;
+  }
+}
+
+
+// Offset the popover to account for the popover arrow
+.popover-header {
+  padding: Rpopover-header-padding-y Rpopover-header-padding-x;
+  margin-bottom: 0; // Reset the default from Reboot
+  @include font-size(Rfont-size-base);
+  color: Rpopover-header-color;
+  background-color: Rpopover-header-bg;
+  border-bottom: Rpopover-border-width solid darken(Rpopover-header-bg, 5%);
+  @include border-top-radius(Rpopover-inner-border-radius);
+
+  &:empty {
+    display: none;
+  }
+}
+
+.popover-body {
+  padding: Rpopover-body-padding-y Rpopover-body-padding-x;
+  color: Rpopover-body-color;
+}

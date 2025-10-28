@@ -1,0 +1,13 @@
+@mixin alert-variant(Rbackground, Rborder, Rcolor) {
+  color: Rcolor;
+  @include gradient-bg(Rbackground);
+  border-color: Rborder;
+
+  hr {
+    border-top-color: darken(Rborder, 5%);
+  }
+
+  .alert-link {
+    color: darken(Rcolor, 10%);
+  }
+}

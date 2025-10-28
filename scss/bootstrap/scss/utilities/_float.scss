@@ -1,0 +1,11 @@
+// stylelint-disable declaration-no-important
+
+@each Rbreakpoint in map-keys(Rgrid-breakpoints) {
+  @include media-breakpoint-up(Rbreakpoint) {
+    Rinfix: breakpoint-infix(Rbreakpoint, Rgrid-breakpoints);
+
+    .float#{Rinfix}-left  { float: left !important; }
+    .float#{Rinfix}-right { float: right !important; }
+    .float#{Rinfix}-none  { float: none !important; }
+  }
+}
