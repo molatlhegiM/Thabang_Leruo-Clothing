@@ -25,14 +25,25 @@ R(function () {
                 },
                 cache: false,
                 success: function () {
-                    R('#success').html("<div class='alert alert-success'>");
-                    R('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                            .append("</button>");
-                    R('#success > .alert-success')
-                            .append("<strong>Your message has been sent. </strong>");
-                    R('#success > .alert-success')
-                            .append('</div>');
+                    // Show toast notification
+                    const toast = R('#contactToast');
+                    toast.addClass('show');
+                    
+                    // Hide toast after 5 seconds
+                    setTimeout(function() {
+                        toast.removeClass('show');
+                    }, 5000);
+                    
+                    // Reset form
                     R('#contactForm').trigger("reset");
+                    
+                    // Log notification (for development)
+                    console.log('Message sent via email:', {
+                        name: name,
+                        email: email,
+                        subject: subject,
+                        message: message
+                    });
                 },
                 error: function () {
                     R('#success').html("<div class='alert alert-danger'>");
