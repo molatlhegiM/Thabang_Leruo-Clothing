@@ -3,11 +3,10 @@ backend:
   repo: molatlhegiM/Thabang_Leruo-Clothing
   branch: main
   open_authoring: true
-  # The key difference: use workflow instead of publish_mode
-  workflow: editorial_workflow
+  workflow: editorial_workflow    # THIS IS THE FIX
 
-media_folder: "images/uploads"    # Where uploaded images are stored
-public_folder: "/images/uploads"  # How to access them from the site
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "homepage"
