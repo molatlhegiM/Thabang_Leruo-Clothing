@@ -16,22 +16,12 @@ collections:
         label: "Home Page"
         name: "home"
         fields:
-          - label: "Hero Image"
-            name: "hero_image"
-            widget: "image"
-          - label: "About Section Text"
-            name: "about_text"
-            widget: "text"
-          - label: "Featured Products"
-            name: "featured_products"
-            widget: "list"
-            fields:
-              - label: "Product Name"
-                name: "product_name"
-                widget: "string"
-              - label: "Product Image"
-                name: "product_image"
-                widget: "image"
-              - label: "Product Description"
-                name: "product_description"
-                widget: "text"
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "About Section Text", name: "about_text", widget: "text" }
+          - { label: "Featured Products", name: "featured_products", widget: "list",
+              fields: [
+                { label: "Product Name", name: "product_name", widget: "string" },
+                { label: "Product Image", name: "product_image", widget: "image" },
+                { label: "Product Description", name: "product_description", widget: "text" }
+              ]
+            }
