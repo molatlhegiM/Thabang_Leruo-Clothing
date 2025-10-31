@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: molatlhegiM/Thabang_Leruo-Clothing
+  repo: "molatlhegiM/Thabang_Leruo-Clothing"
   branch: main
   open_authoring: true
   workflow: editorial_workflow    # THIS IS THE FIX
