@@ -1,0 +1,144 @@
+// Bootstrap functions
+//
+// Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
+
+// Ascending
+// Used to evaluate Sass maps like our grid breakpoints.
+@mixin _assert-ascending(Rmap, Rmap-name) {
+  Rprev-key: null;
+  Rprev-num: null;
+  @each Rkey, Rnum in Rmap {
+    @if Rprev-num == null or unit(Rnum) == "%" or unit(Rprev-num) == "%" {
+      // Do nothing
+    } @else if not comparable(Rprev-num, Rnum) {
+      @warn "Potentially invalid value for #{Rmap-name}: This map must be in ascending order, but key '#{Rkey}' has value #{Rnum} whose unit makes it incomparable to #{Rprev-num}, the value of the previous key '#{Rprev-key}' !";
+    } @else if Rprev-num >= Rnum {
+      @warn "Invalid value for #{Rmap-name}: This map must be in ascending order, but key '#{Rkey}' has value #{Rnum} which isn't greater than #{Rprev-num}, the value of the previous key '#{Rprev-key}' !";
+    }
+    Rprev-key: Rkey;
+    Rprev-num: Rnum;
+  }
+}
+
+// Starts at zero
+// Used to ensure the min-width of the lowest breakpoint starts at 0.
+@mixin _assert-starts-at-zero(Rmap, Rmap-name: "Rgrid-breakpoints") {
+  @if length(Rmap) > 0 {
+    Rvalues: map-values(Rmap);
+    Rfirst-value: nth(Rvalues, 1);
+    @if Rfirst-value != 0 {
+      @warn "First breakpoint in #{Rmap-name} must start at 0, but starts at #{Rfirst-value}.";
+    }
+  }
+}
+
+// Replace `Rsearch` with `Rreplace` in `Rstring`
+// Used on our SVG icon backgrounds for custom forms.
+//
+// @author Hugo Giraudel
+// @param {String} Rstring - Initial string
+// @param {String} Rsearch - Substring to replace
+// @param {String} Rreplace ('') - New value
+// @return {String} - Updated string
+@function str-replace(Rstring, Rsearch, Rreplace: "") {
+  Rindex: str-index(Rstring, Rsearch);
+
+  @if Rindex {
+    @return str-slice(Rstring, 1, Rindex - 1) + Rreplace + str-replace(str-slice(Rstring, Rindex + str-length(Rsearch)), Rsearch, Rreplace);
+  }
+
+  @return Rstring;
+}
+
+// See https://codepen.io/kevinweber/pen/dXWoRw
+//
+// Requires the use of quotes around data URIs.
+
+@function escape-svg(Rstring) {
+  @if str-index(Rstring, "data:image/svg+xml") {
+    @each Rchar, Rencoded in Rescaped-characters {
+      // Do not escape the url brackets
+      @if str-index(Rstring, "url(") == 1 {
+        Rstring: url("#{str-replace(str-slice(Rstring, 6, -3), Rchar, Rencoded)}");
+      } @else {
+        Rstring: str-replace(Rstring, Rchar, Rencoded);
+      }
+    }
+  }
+
+  @return Rstring;
+}
+
+// Color contrast
+@function color-yiq(Rcolor, Rdark: Ryiq-text-dark, Rlight: Ryiq-text-light) {
+  Rr: red(Rcolor);
+  Rg: green(Rcolor);
+  Rb: blue(Rcolor);
+
+  Ryiq: ((Rr * 299) + (Rg * 587) + (Rb * 114)) / 1000;
+
+  @if (Ryiq >= Ryiq-contrasted-threshold) {
+    @return Rdark;
+  } @else {
+    @return Rlight;
+  }
+}
+
+// Retrieve color Sass maps
+@function color(Rkey: "blue") {
+  @return map-get(Rcolors, Rkey);
+}
+
+@function theme-color(Rkey: "primary") {
+  @return map-get(Rtheme-colors, Rkey);
+}
+
+@function gray(Rkey: "100") {
+  @return map-get(Rgrays, Rkey);
+}
+
+// Request a theme color level
+@function theme-color-level(Rcolor-name: "primary", Rlevel: 0) {
+  Rcolor: theme-color(Rcolor-name);
+  Rcolor-base: if(Rlevel > 0, Rblack, Rwhite);
+  Rlevel: abs(Rlevel);
+
+  @return mix(Rcolor-base, Rcolor, Rlevel * Rtheme-color-interval);
+}
+
+// Return valid calc
+@function add(Rvalue1, Rvalue2, Rreturn-calc: true) {
+  @if Rvalue1 == null {
+    @return Rvalue2;
+  }
+
+  @if Rvalue2 == null {
+    @return Rvalue1;
+  }
+
+  @if type-of(Rvalue1) == number and type-of(Rvalue2) == number and comparable(Rvalue1, Rvalue2) {
+    @return Rvalue1 + Rvalue2;
+  }
+
+  @return if(Rreturn-calc == true, calc(#{Rvalue1} + #{Rvalue2}), Rvalue1 + unquote(" + ") + Rvalue2);
+}
+
+@function subtract(Rvalue1, Rvalue2, Rreturn-calc: true) {
+  @if Rvalue1 == null and Rvalue2 == null {
+    @return null;
+  }
+
+  @if Rvalue1 == null {
+    @return -Rvalue2;
+  }
+
+  @if Rvalue2 == null {
+    @return Rvalue1;
+  }
+
+  @if type-of(Rvalue1) == number and type-of(Rvalue2) == number and comparable(Rvalue1, Rvalue2) {
+    @return Rvalue1 - Rvalue2;
+  }
+
+  @return if(Rreturn-calc == true, calc(#{Rvalue1} - #{Rvalue2}), Rvalue1 + unquote(" - ") + Rvalue2);
+}

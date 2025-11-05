@@ -1,0 +1,19 @@
+// stylelint-disable declaration-no-important
+
+@each Rcolor, Rvalue in Rtheme-colors {
+  @include bg-variant(".bg-#{Rcolor}", Rvalue, true);
+}
+
+@if Renable-gradients {
+  @each Rcolor, Rvalue in Rtheme-colors {
+    @include bg-gradient-variant(".bg-gradient-#{Rcolor}", Rvalue, true);
+  }
+}
+
+.bg-white {
+  background-color: Rwhite !important;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}

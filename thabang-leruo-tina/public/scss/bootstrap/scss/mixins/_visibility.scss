@@ -1,0 +1,8 @@
+// stylelint-disable declaration-no-important
+
+// Visibility
+
+@mixin invisible(Rvisibility) {
+  visibility: Rvisibility !important;
+  @include deprecate("`invisible()`", "v4.3.0", "v5");
+}

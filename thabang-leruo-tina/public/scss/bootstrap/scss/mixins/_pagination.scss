@@ -1,0 +1,22 @@
+// Pagination
+
+@mixin pagination-size(Rpadding-y, Rpadding-x, Rfont-size, Rline-height, Rborder-radius) {
+  .page-link {
+    padding: Rpadding-y Rpadding-x;
+    @include font-size(Rfont-size);
+    line-height: Rline-height;
+  }
+
+  .page-item {
+    &:first-child {
+      .page-link {
+        @include border-left-radius(Rborder-radius);
+      }
+    }
+    &:last-child {
+      .page-link {
+        @include border-right-radius(Rborder-radius);
+      }
+    }
+  }
+}

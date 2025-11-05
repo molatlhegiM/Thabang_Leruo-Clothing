@@ -1,0 +1,52 @@
+//
+// Base styles
+//
+
+.alert {
+  position: relative;
+  padding: Ralert-padding-y Ralert-padding-x;
+  margin-bottom: Ralert-margin-bottom;
+  border: Ralert-border-width solid transparent;
+  @include border-radius(Ralert-border-radius);
+}
+
+// Headings for larger alerts
+.alert-heading {
+  // Specified to prevent conflicts of changing Rheadings-color
+  color: inherit;
+}
+
+// Provide class for links that match alerts
+.alert-link {
+  font-weight: Ralert-link-font-weight;
+}
+
+
+// Dismissible alerts
+//
+// Expand the right padding and account for the close button's positioning.
+
+.alert-dismissible {
+  padding-right: Rclose-font-size + Ralert-padding-x * 2;
+
+  // Adjust close link position
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: Ralert-padding-y Ralert-padding-x;
+    color: inherit;
+  }
+}
+
+
+// Alternate styles
+//
+// Generate contextual modifier classes for colorizing the alert.
+
+@each Rcolor, Rvalue in Rtheme-colors {
+  .alert-#{Rcolor} {
+    @include alert-variant(theme-color-level(Rcolor, Ralert-bg-level), theme-color-level(Rcolor, Ralert-border-level), theme-color-level(Rcolor, Ralert-color-level));
+  }
+}

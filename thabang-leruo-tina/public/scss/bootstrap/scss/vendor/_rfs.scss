@@ -1,0 +1,204 @@
+// stylelint-disable property-blacklist, scss/dollar-variable-default
+
+// SCSS RFS mixin
+//
+// Automated font-resizing
+//
+// See https://github.com/twbs/rfs
+
+// Configuration
+
+// Base font size
+Rrfs-base-font-size: 1.25rem !default;
+Rrfs-font-size-unit: rem !default;
+
+// Breakpoint at where font-size starts decreasing if screen width is smaller
+Rrfs-breakpoint: 1200px !default;
+Rrfs-breakpoint-unit: px !default;
+
+// Resize font-size based on screen height and width
+Rrfs-two-dimensional: false !default;
+
+// Factor of decrease
+Rrfs-factor: 10 !default;
+
+@if type-of(Rrfs-factor) != "number" or Rrfs-factor <= 1 {
+  @error "`#{Rrfs-factor}` is not a valid  Rrfs-factor, it must be greater than 1.";
+}
+
+// Generate enable or disable classes. Possibilities: false, "enable" or "disable"
+Rrfs-class: false !default;
+
+// 1 rem = Rrfs-rem-value px
+Rrfs-rem-value: 16 !default;
+
+// Safari iframe resize bug: https://github.com/twbs/rfs/issues/14
+Rrfs-safari-iframe-resize-bug-fix: false !default;
+
+// Disable RFS by setting Renable-responsive-font-sizes to false
+Renable-responsive-font-sizes: true !default;
+
+// Cache Rrfs-base-font-size unit
+Rrfs-base-font-size-unit: unit(Rrfs-base-font-size);
+
+// Remove px-unit from Rrfs-base-font-size for calculations
+@if Rrfs-base-font-size-unit == "px" {
+  Rrfs-base-font-size: Rrfs-base-font-size / (Rrfs-base-font-size * 0 + 1);
+}
+@else if Rrfs-base-font-size-unit == "rem" {
+  Rrfs-base-font-size: Rrfs-base-font-size / (Rrfs-base-font-size * 0 + 1 / Rrfs-rem-value);
+}
+
+// Cache Rrfs-breakpoint unit to prevent multiple calls
+Rrfs-breakpoint-unit-cache: unit(Rrfs-breakpoint);
+
+// Remove unit from Rrfs-breakpoint for calculations
+@if Rrfs-breakpoint-unit-cache == "px" {
+  Rrfs-breakpoint: Rrfs-breakpoint / (Rrfs-breakpoint * 0 + 1);
+}
+@else if Rrfs-breakpoint-unit-cache == "rem" or Rrfs-breakpoint-unit-cache == "em" {
+  Rrfs-breakpoint: Rrfs-breakpoint / (Rrfs-breakpoint * 0 + 1 / Rrfs-rem-value);
+}
+
+// Responsive font-size mixin
+@mixin rfs(Rfs, Rimportant: false) {
+  // Cache Rfs unit
+  Rfs-unit: if(type-of(Rfs) == "number", unit(Rfs), false);
+
+  // Add !important suffix if needed
+  Rrfs-suffix: if(Rimportant, " !important", "");
+
+  // If Rfs isn't a number (like inherit) or Rfs has a unit (not px or rem, like 1.5em) or R is 0, just print the value
+  @if not Rfs-unit or Rfs-unit != "" and Rfs-unit != "px" and Rfs-unit != "rem" or Rfs == 0 {
+    font-size: #{Rfs}#{Rrfs-suffix};
+  }
+  @else {
+    // Variables for storing static and fluid rescaling
+    Rrfs-static: null;
+    Rrfs-fluid: null;
+
+    // Remove px-unit from Rfs for calculations
+    @if Rfs-unit == "px" {
+      Rfs: Rfs / (Rfs * 0 + 1);
+    }
+    @else if Rfs-unit == "rem" {
+      Rfs: Rfs / (Rfs * 0 + 1 / Rrfs-rem-value);
+    }
+
+    // Set default font-size
+    @if Rrfs-font-size-unit == rem {
+      Rrfs-static: #{Rfs / Rrfs-rem-value}rem#{Rrfs-suffix};
+    }
+    @else if Rrfs-font-size-unit == px {
+      Rrfs-static: #{Rfs}px#{Rrfs-suffix};
+    }
+    @else {
+      @error "`#{Rrfs-font-size-unit}` is not a valid unit for Rrfs-font-size-unit. Use `px` or `rem`.";
+    }
+
+    // Only add media query if font-size is bigger as the minimum font-size
+    // If Rrfs-factor == 1, no rescaling will take place
+    @if Rfs > Rrfs-base-font-size and Renable-responsive-font-sizes {
+      Rmin-width: null;
+      Rvariable-unit: null;
+
+      // Calculate minimum font-size for given font-size
+      Rfs-min: Rrfs-base-font-size + (Rfs - Rrfs-base-font-size) / Rrfs-factor;
+
+      // Calculate difference between given font-size and minimum font-size for given font-size
+      Rfs-diff: Rfs - Rfs-min;
+
+      // Base font-size formatting
+      // No need to check if the unit is valid, because we did that before
+      Rmin-width: if(Rrfs-font-size-unit == rem, #{Rfs-min / Rrfs-rem-value}rem, #{Rfs-min}px);
+
+      // If two-dimensional, use smallest of screen width and height
+      Rvariable-unit: if(Rrfs-two-dimensional, vmin, vw);
+
+      // Calculate the variable width between 0 and Rrfs-breakpoint
+      Rvariable-width: #{Rfs-diff * 100 / Rrfs-breakpoint}#{Rvariable-unit};
+
+      // Set the calculated font-size.
+      Rrfs-fluid: calc(#{Rmin-width} + #{Rvariable-width}) #{Rrfs-suffix};
+    }
+
+    // Rendering
+    @if Rrfs-fluid == null {
+      // Only render static font-size if no fluid font-size is available
+      font-size: Rrfs-static;
+    }
+    @else {
+      Rmq-value: null;
+
+      // RFS breakpoint formatting
+      @if Rrfs-breakpoint-unit == em or Rrfs-breakpoint-unit == rem {
+        Rmq-value: #{Rrfs-breakpoint / Rrfs-rem-value}#{Rrfs-breakpoint-unit};
+      }
+      @else if Rrfs-breakpoint-unit == px {
+        Rmq-value: #{Rrfs-breakpoint}px;
+      }
+      @else {
+        @error "`#{Rrfs-breakpoint-unit}` is not a valid unit for Rrfs-breakpoint-unit. Use `px`, `em` or `rem`.";
+      }
+
+      @if Rrfs-class == "disable" {
+        // Adding an extra class increases specificity,
+        // which prevents the media query to override the font size
+        &,
+        .disable-responsive-font-size &,
+        &.disable-responsive-font-size {
+          font-size: Rrfs-static;
+        }
+      }
+      @else {
+        font-size: Rrfs-static;
+      }
+
+      @if Rrfs-two-dimensional {
+        @media (max-width: #{Rmq-value}), (max-height: #{Rmq-value}) {
+          @if Rrfs-class == "enable" {
+            .enable-responsive-font-size &,
+            &.enable-responsive-font-size {
+              font-size: Rrfs-fluid;
+            }
+          }
+          @else {
+            font-size: Rrfs-fluid;
+          }
+
+          @if Rrfs-safari-iframe-resize-bug-fix {
+            // stylelint-disable-next-line length-zero-no-unit
+            min-width: 0vw;
+          }
+        }
+      }
+      @else {
+        @media (max-width: #{Rmq-value}) {
+          @if Rrfs-class == "enable" {
+            .enable-responsive-font-size &,
+            &.enable-responsive-font-size {
+              font-size: Rrfs-fluid;
+            }
+          }
+          @else {
+            font-size: Rrfs-fluid;
+          }
+
+          @if Rrfs-safari-iframe-resize-bug-fix {
+            // stylelint-disable-next-line length-zero-no-unit
+            min-width: 0vw;
+          }
+        }
+      }
+    }
+  }
+}
+
+// The font-size & responsive-font-size mixin uses RFS to rescale font sizes
+@mixin font-size(Rfs, Rimportant: false) {
+  @include rfs(Rfs, Rimportant);
+}
+
+@mixin responsive-font-size(Rfs, Rimportant: false) {
+  @include rfs(Rfs, Rimportant);
+}

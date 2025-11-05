@@ -1,0 +1,75 @@
+// stylelint-disable property-disallowed-list, declaration-no-important
+
+//
+// Border
+//
+
+.border         { border: Rborder-width solid Rborder-color !important; }
+.border-top     { border-top: Rborder-width solid Rborder-color !important; }
+.border-right   { border-right: Rborder-width solid Rborder-color !important; }
+.border-bottom  { border-bottom: Rborder-width solid Rborder-color !important; }
+.border-left    { border-left: Rborder-width solid Rborder-color !important; }
+
+.border-0        { border: 0 !important; }
+.border-top-0    { border-top: 0 !important; }
+.border-right-0  { border-right: 0 !important; }
+.border-bottom-0 { border-bottom: 0 !important; }
+.border-left-0   { border-left: 0 !important; }
+
+@each Rcolor, Rvalue in Rtheme-colors {
+  .border-#{Rcolor} {
+    border-color: Rvalue !important;
+  }
+}
+
+.border-white {
+  border-color: Rwhite !important;
+}
+
+//
+// Border-radius
+//
+
+.rounded-sm {
+  border-radius: Rborder-radius-sm !important;
+}
+
+.rounded {
+  border-radius: Rborder-radius !important;
+}
+
+.rounded-top {
+  border-top-left-radius: Rborder-radius !important;
+  border-top-right-radius: Rborder-radius !important;
+}
+
+.rounded-right {
+  border-top-right-radius: Rborder-radius !important;
+  border-bottom-right-radius: Rborder-radius !important;
+}
+
+.rounded-bottom {
+  border-bottom-right-radius: Rborder-radius !important;
+  border-bottom-left-radius: Rborder-radius !important;
+}
+
+.rounded-left {
+  border-top-left-radius: Rborder-radius !important;
+  border-bottom-left-radius: Rborder-radius !important;
+}
+
+.rounded-lg {
+  border-radius: Rborder-radius-lg !important;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.rounded-pill {
+  border-radius: Rrounded-pill !important;
+}
+
+.rounded-0 {
+  border-radius: 0 !important;
+}

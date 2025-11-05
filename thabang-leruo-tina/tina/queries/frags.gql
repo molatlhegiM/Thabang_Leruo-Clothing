@@ -1,0 +1,4 @@
+# Empty fragment - no global collection needed
+fragment LayoutQueryFragment on Query {
+  __typename
+}

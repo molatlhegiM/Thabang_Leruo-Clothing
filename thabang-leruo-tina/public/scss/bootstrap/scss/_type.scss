@@ -1,0 +1,125 @@
+// stylelint-disable declaration-no-important, selector-list-comma-newline-after
+
+//
+// Headings
+//
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: Rheadings-margin-bottom;
+  font-family: Rheadings-font-family;
+  font-weight: Rheadings-font-weight;
+  line-height: Rheadings-line-height;
+  color: Rheadings-color;
+}
+
+h1, .h1 { @include font-size(Rh1-font-size); }
+h2, .h2 { @include font-size(Rh2-font-size); }
+h3, .h3 { @include font-size(Rh3-font-size); }
+h4, .h4 { @include font-size(Rh4-font-size); }
+h5, .h5 { @include font-size(Rh5-font-size); }
+h6, .h6 { @include font-size(Rh6-font-size); }
+
+.lead {
+  @include font-size(Rlead-font-size);
+  font-weight: Rlead-font-weight;
+}
+
+// Type display classes
+.display-1 {
+  @include font-size(Rdisplay1-size);
+  font-weight: Rdisplay1-weight;
+  line-height: Rdisplay-line-height;
+}
+.display-2 {
+  @include font-size(Rdisplay2-size);
+  font-weight: Rdisplay2-weight;
+  line-height: Rdisplay-line-height;
+}
+.display-3 {
+  @include font-size(Rdisplay3-size);
+  font-weight: Rdisplay3-weight;
+  line-height: Rdisplay-line-height;
+}
+.display-4 {
+  @include font-size(Rdisplay4-size);
+  font-weight: Rdisplay4-weight;
+  line-height: Rdisplay-line-height;
+}
+
+
+//
+// Horizontal rules
+//
+
+hr {
+  margin-top: Rhr-margin-y;
+  margin-bottom: Rhr-margin-y;
+  border: 0;
+  border-top: Rhr-border-width solid Rhr-border-color;
+}
+
+
+//
+// Emphasis
+//
+
+small,
+.small {
+  @include font-size(Rsmall-font-size);
+  font-weight: Rfont-weight-normal;
+}
+
+mark,
+.mark {
+  padding: Rmark-padding;
+  background-color: Rmark-bg;
+}
+
+
+//
+// Lists
+//
+
+.list-unstyled {
+  @include list-unstyled();
+}
+
+// Inline turns list items into inline-block
+.list-inline {
+  @include list-unstyled();
+}
+.list-inline-item {
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-right: Rlist-inline-padding;
+  }
+}
+
+
+//
+// Misc
+//
+
+// Builds on `abbr`
+.initialism {
+  @include font-size(90%);
+  text-transform: uppercase;
+}
+
+// Blockquotes
+.blockquote {
+  margin-bottom: Rspacer;
+  @include font-size(Rblockquote-font-size);
+}
+
+.blockquote-footer {
+  display: block;
+  @include font-size(Rblockquote-small-font-size);
+  color: Rblockquote-small-color;
+
+  &::before {
+    content: "\2014\00A0"; // em dash, nbsp
+  }
+}

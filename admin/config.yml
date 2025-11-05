@@ -1,12 +1,13 @@
 backend:
   name: github
-  repo: "molatlhegiM/Thabang_Leruo-Clothing"
+  repo: molatlhegiM/Thabang_Leruo-Clothing
   branch: main
   open_authoring: true
-  publish_mode: editorial_workflow
+  # The key difference: use workflow instead of publish_mode
+  workflow: editorial_workflow
 
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+media_folder: "images/uploads"    # Where uploaded images are stored
+public_folder: "/images/uploads"  # How to access them from the site
 
 collections:
   - name: "homepage"
@@ -16,12 +17,22 @@ collections:
         label: "Home Page"
         name: "home"
         fields:
-          - { label: "Hero Image", name: "hero_image", widget: "image" }
-          - { label: "About Section Text", name: "about_text", widget: "text" }
-          - { label: "Featured Products", name: "featured_products", widget: "list",
-              fields: [
-                { label: "Product Name", name: "product_name", widget: "string" },
-                { label: "Product Image", name: "product_image", widget: "image" },
-                { label: "Product Description", name: "product_description", widget: "text" }
-              ]
-            }
+          - label: "Hero Image"
+            name: "hero_image"
+            widget: "image"
+          - label: "About Section Text"
+            name: "about_text"
+            widget: "text"
+          - label: "Featured Products"
+            name: "featured_products"
+            widget: "list"
+            fields:
+              - label: "Product Name"
+                name: "product_name"
+                widget: "string"
+              - label: "Product Image"
+                name: "product_image"
+                widget: "image"
+              - label: "Product Description"
+                name: "product_description"
+                widget: "text"

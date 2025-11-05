@@ -1,0 +1,142 @@
+// stylelint-disable selector-no-qualifying-type
+
+//
+// Base styles
+//
+
+.btn {
+  display: inline-block;
+  font-family: Rbtn-font-family;
+  font-weight: Rbtn-font-weight;
+  color: Rbody-color;
+  text-align: center;
+  text-decoration: if(Rlink-decoration == none, null, none);
+  white-space: Rbtn-white-space;
+  vertical-align: middle;
+  user-select: none;
+  background-color: transparent;
+  border: Rbtn-border-width solid transparent;
+  @include button-size(Rbtn-padding-y, Rbtn-padding-x, Rbtn-font-size, Rbtn-line-height, Rbtn-border-radius);
+  @include transition(Rbtn-transition);
+
+  @include hover() {
+    color: Rbody-color;
+    text-decoration: none;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: Rbtn-focus-box-shadow;
+  }
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    opacity: Rbtn-disabled-opacity;
+    @include box-shadow(none);
+  }
+
+  &:not(:disabled):not(.disabled) {
+    cursor: if(Renable-pointer-cursor-for-buttons, pointer, null);
+
+    &:active,
+    &.active {
+      @include box-shadow(Rbtn-active-box-shadow);
+
+      &:focus {
+        @include box-shadow(Rbtn-focus-box-shadow, Rbtn-active-box-shadow);
+      }
+    }
+  }
+}
+
+// Future-proof disabling of clicks on `<a>` elements
+a.btn.disabled,
+fieldset:disabled a.btn {
+  pointer-events: none;
+}
+
+
+//
+// Alternate buttons
+//
+
+@each Rcolor, Rvalue in Rtheme-colors {
+  .btn-#{Rcolor} {
+    @include button-variant(Rvalue, Rvalue);
+  }
+}
+
+@each Rcolor, Rvalue in Rtheme-colors {
+  .btn-outline-#{Rcolor} {
+    @include button-outline-variant(Rvalue);
+  }
+}
+
+
+//
+// Link buttons
+//
+
+// Make a button look and behave like a link
+.btn-link {
+  font-weight: Rfont-weight-normal;
+  color: Rlink-color;
+  text-decoration: Rlink-decoration;
+
+  @include hover() {
+    color: Rlink-hover-color;
+    text-decoration: Rlink-hover-decoration;
+  }
+
+  &:focus,
+  &.focus {
+    text-decoration: Rlink-hover-decoration;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: Rbtn-link-disabled-color;
+    pointer-events: none;
+  }
+
+  // No need for an active state here
+}
+
+
+//
+// Button Sizes
+//
+
+.btn-lg {
+  @include button-size(Rbtn-padding-y-lg, Rbtn-padding-x-lg, Rbtn-font-size-lg, Rbtn-line-height-lg, Rbtn-border-radius-lg);
+}
+
+.btn-sm {
+  @include button-size(Rbtn-padding-y-sm, Rbtn-padding-x-sm, Rbtn-font-size-sm, Rbtn-line-height-sm, Rbtn-border-radius-sm);
+}
+
+
+//
+// Block button
+//
+
+.btn-block {
+  display: block;
+  width: 100%;
+
+  // Vertically space out multiple block buttons
+  + .btn-block {
+    margin-top: Rbtn-block-spacing-y;
+  }
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}

@@ -1,0 +1,524 @@
+// Embedded icons from Open Iconic.
+// Released under MIT and copyright 2014 Waybury.
+// https://useiconic.com/open
+
+
+// Checkboxes and radios
+//
+// Base class takes care of all the key behavioral aspects.
+
+.custom-control {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-height: Rfont-size-base * Rline-height-base;
+  padding-left: Rcustom-control-gutter + Rcustom-control-indicator-size;
+  color-adjust: exact; // Keep themed appearance for print
+}
+
+.custom-control-inline {
+  display: inline-flex;
+  margin-right: Rcustom-control-spacer-x;
+}
+
+.custom-control-input {
+  position: absolute;
+  left: 0;
+  z-index: -1; // Put the input behind the label so it doesn't overlay text
+  width: Rcustom-control-indicator-size;
+  height: (Rfont-size-base * Rline-height-base + Rcustom-control-indicator-size) / 2;
+  opacity: 0;
+
+  &:checked ~ .custom-control-label::before {
+    color: Rcustom-control-indicator-checked-color;
+    border-color: Rcustom-control-indicator-checked-border-color;
+    @include gradient-bg(Rcustom-control-indicator-checked-bg);
+    @include box-shadow(Rcustom-control-indicator-checked-box-shadow);
+  }
+
+  &:focus ~ .custom-control-label::before {
+    // the mixin is not used here to make sure there is feedback
+    @if Renable-shadows {
+      box-shadow: Rinput-box-shadow, Rcustom-control-indicator-focus-box-shadow;
+    } @else {
+      box-shadow: Rcustom-control-indicator-focus-box-shadow;
+    }
+  }
+
+  &:focus:not(:checked) ~ .custom-control-label::before {
+    border-color: Rcustom-control-indicator-focus-border-color;
+  }
+
+  &:not(:disabled):active ~ .custom-control-label::before {
+    color: Rcustom-control-indicator-active-color;
+    background-color: Rcustom-control-indicator-active-bg;
+    border-color: Rcustom-control-indicator-active-border-color;
+    @include box-shadow(Rcustom-control-indicator-active-box-shadow);
+  }
+
+  // Use [disabled] and :disabled to work around https://github.com/twbs/bootstrap/issues/28247
+  &[disabled],
+  &:disabled {
+    ~ .custom-control-label {
+      color: Rcustom-control-label-disabled-color;
+
+      &::before {
+        background-color: Rcustom-control-indicator-disabled-bg;
+      }
+    }
+  }
+}
+
+// Custom control indicators
+//
+// Build the custom controls out of pseudo-elements.
+
+.custom-control-label {
+  position: relative;
+  margin-bottom: 0;
+  color: Rcustom-control-label-color;
+  vertical-align: top;
+  cursor: Rcustom-control-cursor;
+
+  // Background-color and (when enabled) gradient
+  &::before {
+    position: absolute;
+    top: (Rfont-size-base * Rline-height-base - Rcustom-control-indicator-size) / 2;
+    left: -(Rcustom-control-gutter + Rcustom-control-indicator-size);
+    display: block;
+    width: Rcustom-control-indicator-size;
+    height: Rcustom-control-indicator-size;
+    pointer-events: none;
+    content: "";
+    background-color: Rcustom-control-indicator-bg;
+    border: Rcustom-control-indicator-border-color solid Rcustom-control-indicator-border-width;
+    @include box-shadow(Rcustom-control-indicator-box-shadow);
+  }
+
+  // Foreground (icon)
+  &::after {
+    position: absolute;
+    top: (Rfont-size-base * Rline-height-base - Rcustom-control-indicator-size) / 2;
+    left: -(Rcustom-control-gutter + Rcustom-control-indicator-size);
+    display: block;
+    width: Rcustom-control-indicator-size;
+    height: Rcustom-control-indicator-size;
+    content: "";
+    background: no-repeat 50% / #{Rcustom-control-indicator-bg-size};
+  }
+}
+
+
+// Checkboxes
+//
+// Tweak just a few things for checkboxes.
+
+.custom-checkbox {
+  .custom-control-label::before {
+    @include border-radius(Rcustom-checkbox-indicator-border-radius);
+  }
+
+  .custom-control-input:checked ~ .custom-control-label {
+    &::after {
+      background-image: escape-svg(Rcustom-checkbox-indicator-icon-checked);
+    }
+  }
+
+  .custom-control-input:indeterminate ~ .custom-control-label {
+    &::before {
+      border-color: Rcustom-checkbox-indicator-indeterminate-border-color;
+      @include gradient-bg(Rcustom-checkbox-indicator-indeterminate-bg);
+      @include box-shadow(Rcustom-checkbox-indicator-indeterminate-box-shadow);
+    }
+    &::after {
+      background-image: escape-svg(Rcustom-checkbox-indicator-icon-indeterminate);
+    }
+  }
+
+  .custom-control-input:disabled {
+    &:checked ~ .custom-control-label::before {
+      @include gradient-bg(Rcustom-control-indicator-checked-disabled-bg);
+    }
+    &:indeterminate ~ .custom-control-label::before {
+      @include gradient-bg(Rcustom-control-indicator-checked-disabled-bg);
+    }
+  }
+}
+
+// Radios
+//
+// Tweak just a few things for radios.
+
+.custom-radio {
+  .custom-control-label::before {
+    // stylelint-disable-next-line property-disallowed-list
+    border-radius: Rcustom-radio-indicator-border-radius;
+  }
+
+  .custom-control-input:checked ~ .custom-control-label {
+    &::after {
+      background-image: escape-svg(Rcustom-radio-indicator-icon-checked);
+    }
+  }
+
+  .custom-control-input:disabled {
+    &:checked ~ .custom-control-label::before {
+      @include gradient-bg(Rcustom-control-indicator-checked-disabled-bg);
+    }
+  }
+}
+
+
+// switches
+//
+// Tweak a few things for switches
+
+.custom-switch {
+  padding-left: Rcustom-switch-width + Rcustom-control-gutter;
+
+  .custom-control-label {
+    &::before {
+      left: -(Rcustom-switch-width + Rcustom-control-gutter);
+      width: Rcustom-switch-width;
+      pointer-events: all;
+      // stylelint-disable-next-line property-disallowed-list
+      border-radius: Rcustom-switch-indicator-border-radius;
+    }
+
+    &::after {
+      top: add((Rfont-size-base * Rline-height-base - Rcustom-control-indicator-size) / 2, Rcustom-control-indicator-border-width * 2);
+      left: add(-(Rcustom-switch-width + Rcustom-control-gutter), Rcustom-control-indicator-border-width * 2);
+      width: Rcustom-switch-indicator-size;
+      height: Rcustom-switch-indicator-size;
+      background-color: Rcustom-control-indicator-border-color;
+      // stylelint-disable-next-line property-disallowed-list
+      border-radius: Rcustom-switch-indicator-border-radius;
+      @include transition(transform .15s ease-in-out, Rcustom-forms-transition);
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label {
+    &::after {
+      background-color: Rcustom-control-indicator-bg;
+      transform: translateX(Rcustom-switch-width - Rcustom-control-indicator-size);
+    }
+  }
+
+  .custom-control-input:disabled {
+    &:checked ~ .custom-control-label::before {
+      @include gradient-bg(Rcustom-control-indicator-checked-disabled-bg);
+    }
+  }
+}
+
+
+// Select
+//
+// Replaces the browser default select with a custom one, mostly pulled from
+// https://primer.github.io/.
+//
+
+.custom-select {
+  display: inline-block;
+  width: 100%;
+  height: Rcustom-select-height;
+  padding: Rcustom-select-padding-y (Rcustom-select-padding-x + Rcustom-select-indicator-padding) Rcustom-select-padding-y Rcustom-select-padding-x;
+  font-family: Rcustom-select-font-family;
+  @include font-size(Rcustom-select-font-size);
+  font-weight: Rcustom-select-font-weight;
+  line-height: Rcustom-select-line-height;
+  color: Rcustom-select-color;
+  vertical-align: middle;
+  background: Rcustom-select-bg Rcustom-select-background;
+  border: Rcustom-select-border-width solid Rcustom-select-border-color;
+  @include border-radius(Rcustom-select-border-radius, 0);
+  @include box-shadow(Rcustom-select-box-shadow);
+  appearance: none;
+
+  &:focus {
+    border-color: Rcustom-select-focus-border-color;
+    outline: 0;
+    @if Renable-shadows {
+      @include box-shadow(Rcustom-select-box-shadow, Rcustom-select-focus-box-shadow);
+    } @else {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      box-shadow: Rcustom-select-focus-box-shadow;
+    }
+
+    &::-ms-value {
+      // For visual consistency with other platforms/browsers,
+      // suppress the default white text on blue background highlight given to
+      // the selected option text when the (still closed) <select> receives focus
+      // in IE and (under certain conditions) Edge.
+      // See https://github.com/twbs/bootstrap/issues/19398.
+      color: Rinput-color;
+      background-color: Rinput-bg;
+    }
+  }
+
+  &[multiple],
+  &[size]:not([size="1"]) {
+    height: auto;
+    padding-right: Rcustom-select-padding-x;
+    background-image: none;
+  }
+
+  &:disabled {
+    color: Rcustom-select-disabled-color;
+    background-color: Rcustom-select-disabled-bg;
+  }
+
+  // Hides the default caret in IE11
+  &::-ms-expand {
+    display: none;
+  }
+
+  // Remove outline from select box in FF
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 Rcustom-select-color;
+  }
+}
+
+.custom-select-sm {
+  height: Rcustom-select-height-sm;
+  padding-top: Rcustom-select-padding-y-sm;
+  padding-bottom: Rcustom-select-padding-y-sm;
+  padding-left: Rcustom-select-padding-x-sm;
+  @include font-size(Rcustom-select-font-size-sm);
+}
+
+.custom-select-lg {
+  height: Rcustom-select-height-lg;
+  padding-top: Rcustom-select-padding-y-lg;
+  padding-bottom: Rcustom-select-padding-y-lg;
+  padding-left: Rcustom-select-padding-x-lg;
+  @include font-size(Rcustom-select-font-size-lg);
+}
+
+
+// File
+//
+// Custom file input.
+
+.custom-file {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: Rcustom-file-height;
+  margin-bottom: 0;
+}
+
+.custom-file-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: Rcustom-file-height;
+  margin: 0;
+  opacity: 0;
+
+  &:focus ~ .custom-file-label {
+    border-color: Rcustom-file-focus-border-color;
+    box-shadow: Rcustom-file-focus-box-shadow;
+  }
+
+  // Use [disabled] and :disabled to work around https://github.com/twbs/bootstrap/issues/28247
+  &[disabled] ~ .custom-file-label,
+  &:disabled ~ .custom-file-label {
+    background-color: Rcustom-file-disabled-bg;
+  }
+
+  @each Rlang, Rvalue in Rcustom-file-text {
+    &:lang(#{Rlang}) ~ .custom-file-label::after {
+      content: Rvalue;
+    }
+  }
+
+  ~ .custom-file-label[data-browse]::after {
+    content: attr(data-browse);
+  }
+}
+
+.custom-file-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: Rcustom-file-height;
+  padding: Rcustom-file-padding-y Rcustom-file-padding-x;
+  font-family: Rcustom-file-font-family;
+  font-weight: Rcustom-file-font-weight;
+  line-height: Rcustom-file-line-height;
+  color: Rcustom-file-color;
+  background-color: Rcustom-file-bg;
+  border: Rcustom-file-border-width solid Rcustom-file-border-color;
+  @include border-radius(Rcustom-file-border-radius);
+  @include box-shadow(Rcustom-file-box-shadow);
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: Rcustom-file-height-inner;
+    padding: Rcustom-file-padding-y Rcustom-file-padding-x;
+    line-height: Rcustom-file-line-height;
+    color: Rcustom-file-button-color;
+    content: "Browse";
+    @include gradient-bg(Rcustom-file-button-bg);
+    border-left: inherit;
+    @include border-radius(0 Rcustom-file-border-radius Rcustom-file-border-radius 0);
+  }
+}
+
+// Range
+//
+// Style range inputs the same across browsers. Vendor-specific rules for pseudo
+// elements cannot be mixed. As such, there are no shared styles for focus or
+// active states on prefixed selectors.
+
+.custom-range {
+  width: 100%;
+  height: add(Rcustom-range-thumb-height, Rcustom-range-thumb-focus-box-shadow-width * 2);
+  padding: 0; // Need to reset padding
+  background-color: transparent;
+  appearance: none;
+
+  &:focus {
+    outline: none;
+
+    // Pseudo-elements must be split across multiple rulesets to have an effect.
+    // No box-shadow() mixin for focus accessibility.
+    &::-webkit-slider-thumb { box-shadow: Rcustom-range-thumb-focus-box-shadow; }
+    &::-moz-range-thumb     { box-shadow: Rcustom-range-thumb-focus-box-shadow; }
+    &::-ms-thumb            { box-shadow: Rcustom-range-thumb-focus-box-shadow; }
+  }
+
+  &::-moz-focus-outer {
+    border: 0;
+  }
+
+  &::-webkit-slider-thumb {
+    width: Rcustom-range-thumb-width;
+    height: Rcustom-range-thumb-height;
+    margin-top: (Rcustom-range-track-height - Rcustom-range-thumb-height) / 2; // Webkit specific
+    @include gradient-bg(Rcustom-range-thumb-bg);
+    border: Rcustom-range-thumb-border;
+    @include border-radius(Rcustom-range-thumb-border-radius);
+    @include box-shadow(Rcustom-range-thumb-box-shadow);
+    @include transition(Rcustom-forms-transition);
+    appearance: none;
+
+    &:active {
+      @include gradient-bg(Rcustom-range-thumb-active-bg);
+    }
+  }
+
+  &::-webkit-slider-runnable-track {
+    width: Rcustom-range-track-width;
+    height: Rcustom-range-track-height;
+    color: transparent; // Why?
+    cursor: Rcustom-range-track-cursor;
+    background-color: Rcustom-range-track-bg;
+    border-color: transparent;
+    @include border-radius(Rcustom-range-track-border-radius);
+    @include box-shadow(Rcustom-range-track-box-shadow);
+  }
+
+  &::-moz-range-thumb {
+    width: Rcustom-range-thumb-width;
+    height: Rcustom-range-thumb-height;
+    @include gradient-bg(Rcustom-range-thumb-bg);
+    border: Rcustom-range-thumb-border;
+    @include border-radius(Rcustom-range-thumb-border-radius);
+    @include box-shadow(Rcustom-range-thumb-box-shadow);
+    @include transition(Rcustom-forms-transition);
+    appearance: none;
+
+    &:active {
+      @include gradient-bg(Rcustom-range-thumb-active-bg);
+    }
+  }
+
+  &::-moz-range-track {
+    width: Rcustom-range-track-width;
+    height: Rcustom-range-track-height;
+    color: transparent;
+    cursor: Rcustom-range-track-cursor;
+    background-color: Rcustom-range-track-bg;
+    border-color: transparent; // Firefox specific?
+    @include border-radius(Rcustom-range-track-border-radius);
+    @include box-shadow(Rcustom-range-track-box-shadow);
+  }
+
+  &::-ms-thumb {
+    width: Rcustom-range-thumb-width;
+    height: Rcustom-range-thumb-height;
+    margin-top: 0; // Edge specific
+    margin-right: Rcustom-range-thumb-focus-box-shadow-width; // Workaround that overflowed box-shadow is hidden.
+    margin-left: Rcustom-range-thumb-focus-box-shadow-width;  // Workaround that overflowed box-shadow is hidden.
+    @include gradient-bg(Rcustom-range-thumb-bg);
+    border: Rcustom-range-thumb-border;
+    @include border-radius(Rcustom-range-thumb-border-radius);
+    @include box-shadow(Rcustom-range-thumb-box-shadow);
+    @include transition(Rcustom-forms-transition);
+    appearance: none;
+
+    &:active {
+      @include gradient-bg(Rcustom-range-thumb-active-bg);
+    }
+  }
+
+  &::-ms-track {
+    width: Rcustom-range-track-width;
+    height: Rcustom-range-track-height;
+    color: transparent;
+    cursor: Rcustom-range-track-cursor;
+    background-color: transparent;
+    border-color: transparent;
+    border-width: Rcustom-range-thumb-height / 2;
+    @include box-shadow(Rcustom-range-track-box-shadow);
+  }
+
+  &::-ms-fill-lower {
+    background-color: Rcustom-range-track-bg;
+    @include border-radius(Rcustom-range-track-border-radius);
+  }
+
+  &::-ms-fill-upper {
+    margin-right: 15px; // arbitrary?
+    background-color: Rcustom-range-track-bg;
+    @include border-radius(Rcustom-range-track-border-radius);
+  }
+
+  &:disabled {
+    &::-webkit-slider-thumb {
+      background-color: Rcustom-range-thumb-disabled-bg;
+    }
+
+    &::-webkit-slider-runnable-track {
+      cursor: default;
+    }
+
+    &::-moz-range-thumb {
+      background-color: Rcustom-range-thumb-disabled-bg;
+    }
+
+    &::-moz-range-track {
+      cursor: default;
+    }
+
+    &::-ms-thumb {
+      background-color: Rcustom-range-thumb-disabled-bg;
+    }
+  }
+}
+
+.custom-control-label::before,
+.custom-file-label,
+.custom-select {
+  @include transition(Rcustom-forms-transition);
+}

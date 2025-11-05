@@ -1,0 +1,18 @@
+query pageQuery {
+  pageConnection {
+    edges {
+      node {
+        id
+        _sys {
+          filename
+        }
+      }
+    }
+  }
+}
+
+query contentQuery($relativePath: String!) {
+  page(relativePath: $relativePath) {
+    ...PageParts
+  }
+}

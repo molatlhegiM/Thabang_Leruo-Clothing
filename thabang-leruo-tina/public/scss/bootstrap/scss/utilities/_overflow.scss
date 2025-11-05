@@ -1,0 +1,5 @@
+// stylelint-disable declaration-no-important
+
+@each Rvalue in Roverflows {
+  .overflow-#{Rvalue} { overflow: Rvalue !important; }
+}

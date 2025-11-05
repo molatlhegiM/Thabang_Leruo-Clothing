@@ -1,0 +1,45 @@
+// Gradients
+
+@mixin gradient-bg(Rcolor) {
+  @if Renable-gradients {
+    background: Rcolor linear-gradient(180deg, mix(Rbody-bg, Rcolor, 15%), Rcolor) repeat-x;
+  } @else {
+    background-color: Rcolor;
+  }
+}
+
+// Horizontal gradient, from left to right
+//
+// Creates two color stops, start and end, by specifying a color and position for each color stop.
+@mixin gradient-x(Rstart-color: Rgray-700, Rend-color: Rgray-800, Rstart-percent: 0%, Rend-percent: 100%) {
+  background-image: linear-gradient(to right, Rstart-color Rstart-percent, Rend-color Rend-percent);
+  background-repeat: repeat-x;
+}
+
+// Vertical gradient, from top to bottom
+//
+// Creates two color stops, start and end, by specifying a color and position for each color stop.
+@mixin gradient-y(Rstart-color: Rgray-700, Rend-color: Rgray-800, Rstart-percent: 0%, Rend-percent: 100%) {
+  background-image: linear-gradient(to bottom, Rstart-color Rstart-percent, Rend-color Rend-percent);
+  background-repeat: repeat-x;
+}
+
+@mixin gradient-directional(Rstart-color: Rgray-700, Rend-color: Rgray-800, Rdeg: 45deg) {
+  background-image: linear-gradient(Rdeg, Rstart-color, Rend-color);
+  background-repeat: repeat-x;
+}
+@mixin gradient-x-three-colors(Rstart-color: Rblue, Rmid-color: Rpurple, Rcolor-stop: 50%, Rend-color: Rred) {
+  background-image: linear-gradient(to right, Rstart-color, Rmid-color Rcolor-stop, Rend-color);
+  background-repeat: no-repeat;
+}
+@mixin gradient-y-three-colors(Rstart-color: Rblue, Rmid-color: Rpurple, Rcolor-stop: 50%, Rend-color: Rred) {
+  background-image: linear-gradient(Rstart-color, Rmid-color Rcolor-stop, Rend-color);
+  background-repeat: no-repeat;
+}
+@mixin gradient-radial(Rinner-color: Rgray-700, Router-color: Rgray-800) {
+  background-image: radial-gradient(circle, Rinner-color, Router-color);
+  background-repeat: no-repeat;
+}
+@mixin gradient-striped(Rcolor: rgba(Rwhite, .15), Rangle: 45deg) {
+  background-image: linear-gradient(Rangle, Rcolor 25%, transparent 25%, transparent 50%, Rcolor 50%, Rcolor 75%, transparent 75%, transparent);
+}

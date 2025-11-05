@@ -1,0 +1,20 @@
+@mixin box-shadow(Rshadow...) {
+  @if Renable-shadows {
+    Rresult: ();
+
+    @if (length(Rshadow) == 1) {
+      // We can pass `@include box-shadow(none);`
+      Rresult: Rshadow;
+    } @else {
+      // Filter to avoid invalid properties for example `box-shadow: none, 1px 1px black;`
+      @for Ri from 1 through length(Rshadow) {
+        @if nth(Rshadow, Ri) != "none" {
+          Rresult: append(Rresult, nth(Rshadow, Ri), "comma");
+        }
+      }
+    }
+    @if (length(Rresult) > 0) {
+      box-shadow: Rresult;
+    }
+  }
+}

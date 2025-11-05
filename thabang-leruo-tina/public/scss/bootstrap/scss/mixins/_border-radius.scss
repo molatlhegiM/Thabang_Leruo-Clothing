@@ -1,0 +1,76 @@
+// stylelint-disable property-disallowed-list
+// Single side border-radius
+
+// Helper function to replace negative values with 0
+@function valid-radius(Rradius) {
+  Rreturn: ();
+  @each Rvalue in Rradius {
+    @if type-of(Rvalue) == number {
+      Rreturn: append(Rreturn, max(Rvalue, 0));
+    } @else {
+      Rreturn: append(Rreturn, Rvalue);
+    }
+  }
+  @return Rreturn;
+}
+
+@mixin border-radius(Rradius: Rborder-radius, Rfallback-border-radius: false) {
+  @if Renable-rounded {
+    border-radius: valid-radius(Rradius);
+  }
+  @else if Rfallback-border-radius != false {
+    border-radius: Rfallback-border-radius;
+  }
+}
+
+@mixin border-top-radius(Rradius) {
+  @if Renable-rounded {
+    border-top-left-radius: valid-radius(Rradius);
+    border-top-right-radius: valid-radius(Rradius);
+  }
+}
+
+@mixin border-right-radius(Rradius) {
+  @if Renable-rounded {
+    border-top-right-radius: valid-radius(Rradius);
+    border-bottom-right-radius: valid-radius(Rradius);
+  }
+}
+
+@mixin border-bottom-radius(Rradius) {
+  @if Renable-rounded {
+    border-bottom-right-radius: valid-radius(Rradius);
+    border-bottom-left-radius: valid-radius(Rradius);
+  }
+}
+
+@mixin border-left-radius(Rradius) {
+  @if Renable-rounded {
+    border-top-left-radius: valid-radius(Rradius);
+    border-bottom-left-radius: valid-radius(Rradius);
+  }
+}
+
+@mixin border-top-left-radius(Rradius) {
+  @if Renable-rounded {
+    border-top-left-radius: valid-radius(Rradius);
+  }
+}
+
+@mixin border-top-right-radius(Rradius) {
+  @if Renable-rounded {
+    border-top-right-radius: valid-radius(Rradius);
+  }
+}
+
+@mixin border-bottom-right-radius(Rradius) {
+  @if Renable-rounded {
+    border-bottom-right-radius: valid-radius(Rradius);
+  }
+}
+
+@mixin border-bottom-left-radius(Rradius) {
+  @if Renable-rounded {
+    border-bottom-left-radius: valid-radius(Rradius);
+  }
+}

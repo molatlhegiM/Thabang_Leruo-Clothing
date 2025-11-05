@@ -1,0 +1,73 @@
+// stylelint-disable declaration-no-important
+
+// Margin and Padding
+
+@each Rbreakpoint in map-keys(Rgrid-breakpoints) {
+  @include media-breakpoint-up(Rbreakpoint) {
+    Rinfix: breakpoint-infix(Rbreakpoint, Rgrid-breakpoints);
+
+    @each Rprop, Rabbrev in (margin: m, padding: p) {
+      @each Rsize, Rlength in Rspacers {
+        .#{Rabbrev}#{Rinfix}-#{Rsize} { #{Rprop}: Rlength !important; }
+        .#{Rabbrev}t#{Rinfix}-#{Rsize},
+        .#{Rabbrev}y#{Rinfix}-#{Rsize} {
+          #{Rprop}-top: Rlength !important;
+        }
+        .#{Rabbrev}r#{Rinfix}-#{Rsize},
+        .#{Rabbrev}x#{Rinfix}-#{Rsize} {
+          #{Rprop}-right: Rlength !important;
+        }
+        .#{Rabbrev}b#{Rinfix}-#{Rsize},
+        .#{Rabbrev}y#{Rinfix}-#{Rsize} {
+          #{Rprop}-bottom: Rlength !important;
+        }
+        .#{Rabbrev}l#{Rinfix}-#{Rsize},
+        .#{Rabbrev}x#{Rinfix}-#{Rsize} {
+          #{Rprop}-left: Rlength !important;
+        }
+      }
+    }
+
+    // Negative margins (e.g., where `.mb-n1` is negative version of `.mb-1`)
+    @each Rsize, Rlength in Rspacers {
+      @if Rsize != 0 {
+        .m#{Rinfix}-n#{Rsize} { margin: -Rlength !important; }
+        .mt#{Rinfix}-n#{Rsize},
+        .my#{Rinfix}-n#{Rsize} {
+          margin-top: -Rlength !important;
+        }
+        .mr#{Rinfix}-n#{Rsize},
+        .mx#{Rinfix}-n#{Rsize} {
+          margin-right: -Rlength !important;
+        }
+        .mb#{Rinfix}-n#{Rsize},
+        .my#{Rinfix}-n#{Rsize} {
+          margin-bottom: -Rlength !important;
+        }
+        .ml#{Rinfix}-n#{Rsize},
+        .mx#{Rinfix}-n#{Rsize} {
+          margin-left: -Rlength !important;
+        }
+      }
+    }
+
+    // Some special margin utils
+    .m#{Rinfix}-auto { margin: auto !important; }
+    .mt#{Rinfix}-auto,
+    .my#{Rinfix}-auto {
+      margin-top: auto !important;
+    }
+    .mr#{Rinfix}-auto,
+    .mx#{Rinfix}-auto {
+      margin-right: auto !important;
+    }
+    .mb#{Rinfix}-auto,
+    .my#{Rinfix}-auto {
+      margin-bottom: auto !important;
+    }
+    .ml#{Rinfix}-auto,
+    .mx#{Rinfix}-auto {
+      margin-left: auto !important;
+    }
+  }
+}

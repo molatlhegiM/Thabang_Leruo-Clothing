@@ -1,0 +1,17 @@
+@mixin badge-variant(Rbg) {
+  color: color-yiq(Rbg);
+  background-color: Rbg;
+
+  @at-root a#{&} {
+    @include hover-focus() {
+      color: color-yiq(Rbg);
+      background-color: darken(Rbg, 10%);
+    }
+
+    &:focus,
+    &.focus {
+      outline: 0;
+      box-shadow: 0 0 0 Rbadge-focus-width rgba(Rbg, .5);
+    }
+  }
+}

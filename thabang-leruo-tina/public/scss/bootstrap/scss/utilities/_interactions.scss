@@ -1,0 +1,5 @@
+// stylelint-disable declaration-no-important
+
+@each Rvalue in Ruser-selects {
+  .user-select-#{Rvalue} { user-select: Rvalue !important; }
+}
